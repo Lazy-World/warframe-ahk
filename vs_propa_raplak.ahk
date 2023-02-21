@@ -18,7 +18,7 @@ global g_raplakDelay := 1608 ; my host has 300+ fps who cares
 global g_step := 5
 
 ; Math
-global g_cooldown := 17186 - g_raplakDelay + g_desiredLimb
+global g_cooldown := 17186 - 1625 + g_desiredLimb
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                Binds                ;;
