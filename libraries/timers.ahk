@@ -1,5 +1,4 @@
 global Frequency
-SetBatchLines, -1
 Process, Priority,, A
 DllCall("QueryPerformanceFrequency", "Int64*", Frequency)   
 
@@ -8,17 +7,17 @@ DllCall("QueryPerformanceFrequency", "Int64*", Frequency)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 lSleep(s_time, ByRef start = "") {
-    Critical
+    ; Critical
     DllCall("QueryPerformanceCounter", "Int64*", CounterBefore)
     if (start != "")
         CounterBefore := start
     Frequency ? Frequency : DllCall("QueryPerformanceFrequency", "Int64*", Frequency)
     if (s_time > 20) {
         DllCall("QueryPerformanceCounter", "Int64*", CounterAfter)
-        Critical Off
+        ; Critical Off
         Sleep % s_time - (1000 * (CounterAfter - CounterBefore) / Frequency) - 20
     }
-    Critical
+    ; Critical
     End := (CounterBefore + ( Frequency * (s_time/1000))) - 1
     loop
     {
@@ -26,7 +25,7 @@ lSleep(s_time, ByRef start = "") {
         if (End <= CounterAfter)
             break
     }
-    Critical Off
+    ; Critical Off
 }
 
 ; s_time = time in milliseconds to sleep, can be input as a decimal, as accurate as frequency (10 MHz)
