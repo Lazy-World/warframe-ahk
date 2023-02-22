@@ -105,15 +105,15 @@ return
 
 ThrowMelee:
 	SendInput {Blind}{%jumpKey%}
-	lSleep(20)
+	lSleep(minSleepTime)
 	SendInput {Blind}{%jumpKey%}
-	lSleep(20)
+	lSleep(minSleepTime)
 	SendInput {Blind}{%aimKey% Down}
-	lSleep(25)
+	lSleep(minSleepTime)
 	SendInput {Blind}{%meleeKey%}
-	lSleep(10)
+	lSleep(minSleepTime)
 	SendInput {Blind}{%aimKey% Up}
-	lSleep(320)
+	lSleep(500)
 return
 
 VasarinDash:
