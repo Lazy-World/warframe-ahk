@@ -13,12 +13,12 @@ ui_theme := ui_theme.voidTheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Globals               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_desiredLimb := -20
-global g_raplakDelay := 1608 ; my host has 300+ fps who cares
+global g_desiredLimb := -20 ; equals to "-0.020" in Yate
+global g_raplakDelay := 1610 ; depends on client FPS
 global g_step := 5
 
 ; Math
-global g_cooldown := 17186 - 1625 + g_desiredLimb
+global g_cooldown := 17186 - g_raplakDelay + g_desiredLimb
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                Binds                ;;
@@ -140,9 +140,6 @@ return
 
 EnergyDrain:
     SendInput, {Blind}{%shiftKey% Down}
-    lSleep(10)
-
-    SendInput, {Blind}{%secondAKey%} ; 2nd madurai ability
     lSleep(10)
     
     Loop, 18
