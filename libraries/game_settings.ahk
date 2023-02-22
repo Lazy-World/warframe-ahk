@@ -12,6 +12,7 @@ meleeKey        = e         ; Melee Attack
 switchKey       = f         ; Switch Weapon
 jumpKey         = Space     ; Jump
 shiftKey        = Shift     ; Sprint / Roll
+sprintKey       = Shift     ; Sprint
 crouchKey       = Ctrl      ; Hold to Crouch
 operatorKey     = XButton1  ; Focus and Transference
 useKey          = x         ; Use

@@ -27,7 +27,7 @@ AntiDesyncKey   = XButton2
 IncreaseTimeKey = Down
 DecreaseTimeKey = Left
 EnergyDrainKey  = F5
-ChinaWaterKey   = Numpad0
+WaterShieldKey  = Numpad0
 
 ; Technical part
 #IfWinActive ahk_exe Warframe.x64.exe
@@ -40,6 +40,7 @@ Hotkey, *%AntiDesyncKey%, AntiDesync
 Hotkey, *%IncreaseTimeKey%, IncreaseTime
 Hotkey, *%DecreaseTimeKey%, DecreaseTime
 Hotkey, *%EnergyDrainKey%, EnergyDrain
+Hotkey, *%WaterShieldKey%, WaterShield
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             GUI Settings            ;;
@@ -175,6 +176,81 @@ BackToWarframe:
     lSleep(30)
 return
 
+WaterShield:
+    startX  := 0
+    startY  := gScreen[2] * 0.45
+    endX    := gScreen[1] * 0.35
+    endY    := gScreen[2] - startY - 20
+
+    loop
+    {
+        PixelSearch,,, startX, startY, endX, endY, 0xAD3932, 15, Fast RGB
+    }
+    until (ErrorLevel == 0)
+
+    BlockInput, On
+    SetTimer, Shard, 10
+    lSleep(260)
+
+    ; MID portal part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+
+    MouseMove(-408 , 204)
+    lSleep(525, beforePropa)
+
+    ; CL portal part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+
+    MouseMove(929, 42)
+    lSleep(580, beforePropa)
+
+    ; CR portal part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+
+    MouseMove(-1087 , -9)
+    lSleep(275, beforePropa)
+
+    ; UNSTUCK part
+    SetTimer, Shard, Off
+    SendInput, {Blind}{%chatKey%}
+    lSleep(15)
+    SendInput, {Text}/unstuck
+    lSleep(15)
+    SendInput, {Enter}
+    lSleep(520, beforePropa)
+
+    ; LONG spawn part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+    SendInput, {Blind}{%meleeKey%}
+
+    MouseMove(-887 , 490)
+    lSleep(20, beforePropa)
+    SendInput, {Blind}{%emoteKey%}
+
+    SendInput, {Blind}{%aimKey% Down}
+    lSleep(100, beforePropa)
+
+    Loop, 35
+    {
+        SendInput, {Blind}{%shootKey%}
+        lSleep(10)
+    }
+    SendInput {%aimKey% Up}
+
+    BlockInput, OFF
+return
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               Timers                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Shard:
+    SendInput, {Blind}{%useKey%}
+return
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                Misc                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -185,5 +261,5 @@ return
 *F11::
     suspend, toggle
     state := A_IsSuspended ? "pause" : "lazy"
-    GuiControl, gui_debug:, DebugText, %state%
+    ui[1].edit_text("T1", state)
 return
