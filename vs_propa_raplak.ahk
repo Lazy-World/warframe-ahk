@@ -13,7 +13,7 @@ ui_theme := ui_theme.voidTheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Globals               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_waterShieldDelay := 200 ; depends on client PING
+global g_waterShieldDelay := 250 ; depends on client PING
 global g_desiredLimb := -20 ; equals to "-0.020" in Yate
 global g_raplakDelay := 1610 ; depends on client FPS
 global g_step := 5
@@ -166,7 +166,10 @@ WaterShield:
     until (ErrorLevel == 0)
 
     BlockInput, On
+
+    GoSub, Shard
     SetTimer, Shard, 10
+    
     lSleep(g_waterShieldDelay)
 
     ; MID portal part
