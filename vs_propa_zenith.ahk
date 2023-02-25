@@ -15,7 +15,7 @@ ui_theme := ui_theme.voidTheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 global g_waterShieldDelay := 200 ; depends on client PING
 global g_desiredLimb := -15 ; equals to "-0.015" in Yate
-global g_raplakDelay := 1610 ; depends on client FPS
+global g_raplakDelay := 1610 ; depends on client FPS 
 
 global g_step := 5
 
