@@ -13,8 +13,10 @@ ui_theme := ui_theme.voidTheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Globals               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_desiredLimb := -20
-global g_raplakDelay := 1608 ; my host has 300+ fps who cares
+global g_waterShieldDelay := 200 ; depends on client PING
+global g_desiredLimb := -15 ; equals to "-0.015" in Yate
+global g_raplakDelay := 1610 ; depends on client FPS
+
 global g_step := 5
 
 ; Math
@@ -27,7 +29,7 @@ AntiDesyncKey   = XButton2
 IncreaseTimeKey = Down
 DecreaseTimeKey = Left
 EnergyDrainKey  = F5
-ChinaWaterKey   = Numpad0
+WaterShieldKey  = Numpad0
 
 ; Technical part
 #IfWinActive ahk_exe Warframe.x64.exe
@@ -40,6 +42,7 @@ Hotkey, *%AntiDesyncKey%, AntiDesync
 Hotkey, *%IncreaseTimeKey%, IncreaseTime
 Hotkey, *%DecreaseTimeKey%, DecreaseTime
 Hotkey, *%EnergyDrainKey%, EnergyDrain
+Hotkey, *%WaterShieldKey%, WaterShield
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             GUI Settings            ;;
@@ -145,9 +148,6 @@ return
 EnergyDrain:
     SendInput, {Blind}{%shiftKey% Down}
     lSleep(10)
-
-    SendInput, {Blind}{%secondAKey%} ; 2nd madurai ability
-    lSleep(10)
     
     Loop, 18
     {
@@ -161,7 +161,7 @@ return
 VigSwap:
     lSleep(10)
     SendInput, {Blind}{%switchKey%}
-        lSleep(20) ; delay before weapon switch
+        lSleep(25) ; delay before weapon switch
     SendInput, {Blind}{%switchKey%}
     lSleep(10)
 return
@@ -175,7 +175,85 @@ BackToWarframe:
     lSleep(1)
     SendInput, {Blind}{%shootKey%}
     
-    lSleep(20)
+    lSleep(30)
+return
+
+WaterShield:
+    startX  := 0
+    startY  := gScreen[2] * 0.45
+    endX    := gScreen[1] * 0.35
+    endY    := gScreen[2] - startY - 20
+
+    loop
+    {
+        PixelSearch,,, startX, startY, endX, endY, 0xB51715, 15, Fast RGB ; 0xAD3932
+    }
+    until (ErrorLevel == 0)
+
+    BlockInput, On
+
+    GoSub, Shard
+    SetTimer, Shard, 10
+    
+    lSleep(g_waterShieldDelay)
+
+    ; MID portal part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+
+    MouseMove(-408 , 204)
+    lSleep(525, beforePropa)
+
+    ; CL portal part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+
+    MouseMove(929, 42)
+    lSleep(580, beforePropa)
+
+    ; CR portal part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+
+    MouseMove(-1087 , -9)
+    lSleep(275, beforePropa)
+
+    ; UNSTUCK part
+    SetTimer, Shard, Off
+    SendInput, {Blind}{%chatKey%}
+    lSleep(15)
+    SendInput, {Text}/unstuck
+    lSleep(15)
+    SendInput, {Enter}
+    lSleep(520, beforePropa)
+
+    ; LONG spawn part
+    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+    SendInput, {Blind}{%shoot2Key%}
+    SendInput, {Blind}{%meleeKey%}
+
+    MouseMove(-887 , 490)
+    lSleep(20, beforePropa)
+    SendInput, {Blind}{%emoteKey%}
+
+    SendInput, {Blind}{%aimKey% Down}
+    lSleep(100, beforePropa)
+
+    Loop, 35
+    {
+        SendInput, {Blind}{%shootKey%}
+        lSleep(10)
+    }
+    SendInput {%aimKey% Up}
+
+    BlockInput, OFF
+return
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               Timers                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Shard:
+    SendInput, {Blind}{%useKey%}
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -188,5 +266,5 @@ return
 *F11::
     suspend, toggle
     state := A_IsSuspended ? "pause" : "lazy"
-    GuiControl, gui_debug:, DebugText, %state%
+    ui[1].edit_text("T1", state)
 return
