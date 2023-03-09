@@ -4,7 +4,7 @@
   <p align="center">AHK is a versatile tool that can be used for a wide range of automation tasks :)</p>
 </p>
 
-# Contents 🌌
+# 📝Contents
 - [Libraries](#-libraries)
   - [Installation](#installation)
   - [Game settings library](#game-settings-library)
@@ -31,7 +31,7 @@
   - **[Gear Hotkeys]** section is responsible for binds in **Gear**
   - **[RTSS binds for FPS]** section is responsible for `FPS cap`
 
-[Back to TOC](#contents-)
+[Back to TOC](#contents)
 
 ---
   
@@ -71,6 +71,6 @@
 
   ![Montserrat preview](./attachments/Images/Montserrat-Medium-Preview.png)
 
-[Back to TOC](#contents-)
+[Back to TOC](#contents)
 
 ---
