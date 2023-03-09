@@ -1,5 +1,21 @@
-global ui_theme := {voidTheme: {winOL: "ADADAD", alpOL: 255, winBG: "151515", alpBG: 180, title: "Montserrat Medium", titleCol: "86C8BC", titleSZ: 13, main: "Montserrat Medium", mainCol: "White", mainSZ: 13, info: "Montserrat Medium", infoCol: "FFF6BD", infoSZ: 13}}
-ui_theme := ui_theme.voidTheme
+global ui_theme := {}
+
+ui_theme.insert("winOL", "ADADAD")
+ui_theme.insert("alpOL", 255)
+ui_theme.insert("winBG", "151515")
+ui_theme.insert("alpBG", 180)
+
+ui_theme.insert("title", "Montserrat Medium")
+ui_theme.insert("titleCol", "86C8BC")
+ui_theme.insert("titleSZ", 13)
+
+ui_theme.insert("main", "Montserrat Medium")
+ui_theme.insert("mainCol", "White")
+ui_theme.insert("mainSZ", 13)
+
+ui_theme.insert("info", "Montserrat Medium")
+ui_theme.insert("infoCol", "FFF6BD")
+ui_theme.insert("infoSZ", 13)
 
 #include %A_AppData%\LazyHub\lib
 
