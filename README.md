@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="180" src="./pictures/cat.ico" alt="lazy.ico">
+  <img width="180" src="./attachments/Images/cat.ico" alt="lazy.ico">
   <h1 align="center">LazyWorld</h1>
   <p align="center">AHK is a versatile tool that can be used for a wide range of automation tasks :)</p>
 </p>
@@ -12,8 +12,8 @@
 
 ### Preview
 
-![JetBrainsMono preview](./pictures/JetBrainsMono-Preview.png)
-![Montserrat preview](./pictures/Montserrat-Medium-Preview.png)
+![JetBrainsMono preview](./attachments/Images/JetBrainsMono-Preview.png)
+![Montserrat preview](./attachments/Images/Montserrat-Medium-Preview.png)
 
 ---
 
