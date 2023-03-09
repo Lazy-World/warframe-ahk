@@ -4,7 +4,7 @@
   <p align="center">AHK is a versatile tool that can be used for a wide range of automation tasks :)</p>
 </p>
 
-# Contents 🚀
+# Contents 🌌
 - [Libraries](#-libraries)
   - [Installation](#installation)
   - [Game settings library](#game-settings-library)
