@@ -4,6 +4,13 @@
   <p align="center">AHK is a versatile tool that can be used for a wide range of automation tasks :)</p>
 </p>
 
+# Contents 🚀
+- [Fonts](#%EF%B8%8F-fonts)
+  - [Download links](#download-links) 
+  - [Font setup](#font-setup)
+  - [Step by Step instruction](#%EF%B8%8F-step-by-step-instruction)
+  - [Preview](#preview)
+  
 ## 🖊️ Fonts
 
 ### Download links
