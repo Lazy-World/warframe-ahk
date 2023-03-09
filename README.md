@@ -7,8 +7,8 @@
 ## 🖊️ Fonts
 
 ### Download links
-- [JetBrainsMono](https://github.com/Lazy-World/warframe-ahk/blob/main/Fonts/JetBrainsMono-Medium.ttf)
-- [Montserrat](https://github.com/Lazy-World/warframe-ahk/blob/main/Fonts/Montserrat-Medium.otf)
+- [JetBrainsMono](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/JetBrainsMono-Medium.ttf)
+- [Montserrat](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/Montserrat-Medium.otf)
 
 ### Preview
 
