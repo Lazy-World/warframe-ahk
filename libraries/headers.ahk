@@ -13,19 +13,20 @@
 ; ListLines Off
 ; CoordMode, Mouse, Client
 
-;---------------------------LUMI---------------------------
+;---------------------------NEW---------------------------
 #SingleInstance Force
 #Persistent
 #NoEnv
 #InstallKeybdHook
-#InstallMouseHook
 SendMode Input
 Process, Priority,, A
-SetBatchLines -1
+ListLines Off
+SetWinDelay, -1
+SetBatchLines, -1
 SetKeyDelay, -1, -1
 SetMouseDelay, -1, -1
-SetControlDelay -1
-SetWinDelay -1
+SetControlDelay, -1
 #MaxHotkeysPerInterval 100000
 #MaxThreads 255
-CoordMode, Mouse, Client
+#KeyHistory 0
+; CoordMode, Mouse, Client

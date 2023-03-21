@@ -4,9 +4,14 @@ Clamp(num, min, max)
     return num > max ? max : num < min ? min : num
 }
 
+ResetCursor()
+{
+    Dllcall("SetCursorPos" , "Int", A_ScreenWidth/2, "Int", A_ScreenHeight/2)
+}
+
 MouseMove(move_x, move_y) 
 {
-    DllCall("mouse_event", "UInt", 1, "Int", move_x, "Int", move_y, "UInt", 0, "Int", 0)
+    DllCall("mouse_event", "UInt", 0x01, "Int", move_x, "Int", move_y, "UInt", 0, "Int", 0)
     return
 }
 
