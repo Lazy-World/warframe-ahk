@@ -30,8 +30,10 @@ ui_theme.insert("infoSZ", 13)
 ;;               Globals               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 global g_waterShieldDelay := 200 ; depends on client PING
+global g_waterTime := 500 ; Water limb time
+
 global g_desiredLimb := -15 ; equals to "-0.015" in Yate
-global g_raplakDelay := 1610 ; depends on client FPS 
+global g_raplakDelay := 1610 ; depends on host FPS 
 
 global g_step := 5
 
@@ -108,14 +110,17 @@ AntiDesync:
         SendInput, {Blind}{%shoot2Key%}
         DllCall("QueryPerformanceCounter", "Int64*", afterPropa)
 
-        lSleep(500)
         GoSub, BackToWarframe
-        GoSub, VigSwap
+        lSleep(700)
+        SendInput, {Blind}{%switchKey%}
         
         lSleep(g_raplakDelay, beforePropa)
 
         DllCall("QueryPerformanceCounter", "Int64*", beforeRaplak)
         SendInput, {Blind}{%shootKey%}
+
+        Sleep 100
+        SendInput, {Blind}{%switchKey%}
         Sleep 4000
 
         UpdateTimer(beforePropa, beforeRaplak)
@@ -174,24 +179,10 @@ EnergyDrain:
     SendInput, {Blind}{%shiftKey% Up}
 return
 
-VigSwap:
-    lSleep(10)
-    SendInput, {Blind}{%switchKey%}
-        lSleep(25) ; delay before weapon switch
-    SendInput, {Blind}{%switchKey%}
-    lSleep(10)
-return
-
 BackToWarframe:
-    lSleep(1)
-    
-    SendInput, {Blind}{%meleeKey%}
-    lSleep(60)
-    SendInput, {Blind}{%emoteKey%}
-    lSleep(1)
-    SendInput, {Blind}{%shootKey%}
-    
-    lSleep(30)
+    SendInput, {Blind}{%secondAKey%}
+    Sleep, 300
+    SendInput, {Blind}{%operatorKey%}
 return
 
 WaterShield:
@@ -205,34 +196,29 @@ WaterShield:
         PixelSearch,,, startX, startY, endX, endY, 0xB51715, 15, Fast RGB ; 0xAD3932
     }
     until (ErrorLevel == 0)
-
-    BlockInput, On
-
+    
+    BlockInput, ON
     GoSub, Shard
     SetTimer, Shard, 10
-    
     lSleep(g_waterShieldDelay)
 
     ; MID portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-
     MouseMove(-408 , 204)
     lSleep(525, beforePropa)
 
     ; CL portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-
     MouseMove(929, 42)
-    lSleep(580, beforePropa)
+    lSleep(525, beforePropa)
 
     ; CR portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-
     MouseMove(-1087 , -9)
-    lSleep(275, beforePropa)
+    lSleep(300, beforePropa)
 
     ; UNSTUCK part
     SetTimer, Shard, Off
@@ -241,28 +227,33 @@ WaterShield:
     SendInput, {Text}/unstuck
     lSleep(15)
     SendInput, {Enter}
-    lSleep(520, beforePropa)
 
-    ; LONG spawn part
+    ; LONG propa to med-tower
+    lSleep(520, beforePropa)
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
     SendInput, {Blind}{%meleeKey%}
 
+    ; LONG zenith limb
     MouseMove(-887 , 490)
     lSleep(20, beforePropa)
     SendInput, {Blind}{%emoteKey%}
+    lSleep(70, beforePropa)
 
-    SendInput, {Blind}{%aimKey% Down}
-    lSleep(100, beforePropa)
-
-    Loop, 35
+    Loop, 130
     {
         SendInput, {Blind}{%shootKey%}
         lSleep(10)
     }
-    SendInput {%aimKey% Up}
-
     BlockInput, OFF
+
+    ; AUTOMATE second limb
+    SetTimer, WaterLimbTime, -250
+
+    lSleep(8000)
+    lSleep(desiredLimbTime + betweenP_Z + g_waterTime + desiredLimb, afterShardDetection)
+    UpdateTimer(afterShardDetection)
+    Gosub, AntiDesync
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -270,6 +261,15 @@ return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Shard:
     SendInput, {Blind}{%useKey%}
+return
+
+WaterLimbTime:
+    InputBox, limbTime, Debil, cat,, 100, 100, 980, 540
+
+    if ErrorLevel
+        return
+
+    g_waterTime := limbTime
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
