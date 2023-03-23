@@ -29,16 +29,15 @@ ui_theme.insert("infoSZ", 13)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Globals               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_waterShieldDelay := 200 ; depends on client PING
-global g_waterTime := 500 ; Water limb time
-
-global g_desiredLimb := -15 ; equals to "-0.015" in Yate
+global g_desiredLimb := -20 ; equals to "-0.020" in Yate
 global g_raplakDelay := 1610 ; depends on host FPS 
-
 global g_step := 5
 
+global g_waterShieldDelay := 200 ; depends on client PING
+global g_waterLimbTime := 500 ; Water limb time
+
 ; Math
-global g_cooldown := 17186 - g_raplakDelay + g_desiredLimb - 1
+global g_cooldown := 17186 - g_raplakDelay + g_desiredLimb
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                Binds                ;;
@@ -198,6 +197,8 @@ WaterShield:
     until (ErrorLevel == 0)
     
     BlockInput, ON
+    DllCall("QueryPerformanceCounter", "Int64*", afterShardDetection)
+    
     GoSub, Shard
     SetTimer, Shard, 10
     lSleep(g_waterShieldDelay)
@@ -251,7 +252,7 @@ WaterShield:
     SetTimer, WaterLimbTime, -250
 
     lSleep(8000)
-    lSleep(desiredLimbTime + betweenP_Z + g_waterTime + desiredLimb, afterShardDetection)
+    lSleep(desiredLimbTime + betweenP_Z + g_waterLimbTime + Clamp(desiredLimb, -20, desiredLimb), afterShardDetection)
     UpdateTimer(afterShardDetection)
     Gosub, AntiDesync
 return
@@ -269,7 +270,7 @@ WaterLimbTime:
     if ErrorLevel
         return
 
-    g_waterTime := limbTime
+    g_waterLimbTime := limbTime
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
