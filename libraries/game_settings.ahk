@@ -14,16 +14,16 @@ useKey          = x             ; Use
 chatKey         = t             ; Chat
 
 ; Abilities
-firstAKey       = 1			    ; 1st Ability
-secondAKey      = 2			    ; 2nd Ability
-thirdAKey       = 3			    ; 3rd Ability
-fourthAKey      = 4			    ; 4th Ability
+firstAKey       = 1             ; 1st Ability
+secondAKey      = 2             ; 2nd Ability
+thirdAKey       = 3             ; 3rd Ability
+fourthAKey      = 4             ; 4th Ability
 
 ; WASD Keys
-wKey            = w			    ; Move Forward
-aKey            = a			    ; Move Left
-sKey            = s			    ; Move Backwards
-dKey            = d			    ; Move Right
+wKey            = w             ; Move Forward
+aKey            = a             ; Move Left
+sKey            = s             ; Move Backwards
+dKey            = d             ; Move Right
 
 ; Gear Hotkeys
 archwingKey     = c             ; Archwing Launcher
