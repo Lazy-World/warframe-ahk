@@ -95,11 +95,12 @@ OpenLastFoundWindow(windowId)
     WinActivate, ahk_id %windowId%
 }
 
-SafeOpenChat(delay = 50):
+SafeOpenChat(delay = 50)
+{
     Sleep % delay
     SendInput % chatKey
     Sleep % delay
-return
+}
 
 CloseOrbiterChat(delay = 50)
 {
