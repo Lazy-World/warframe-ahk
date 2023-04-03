@@ -57,7 +57,7 @@ ChatSpam:
             GoSub, OpenWarframeWindow
     
         if IsWarframeChat
-            GoSub, SafeOpenChat
+            SafeOpenChat(100)
     
         SendMessage(textToSend[mod(A_Index, textToSend.Length())], 100)
 
@@ -95,9 +95,10 @@ OpenLastFoundWindow(windowId)
     WinActivate, ahk_id %windowId%
 }
 
-SafeOpenChat:
+SafeOpenChat(delay = 50):
+    Sleep % delay
     SendInput % chatKey
-    Sleep 150
+    Sleep % delay
 return
 
 CloseOrbiterChat(delay = 50)
