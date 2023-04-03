@@ -58,8 +58,9 @@ ChatSpam:
     
         if IsWarframeChat
             SafeOpenChat(chatKey, 100)
-    
-        SendMessage(textToSend[mod(A_Index, textToSend.Length())], 100)
+        
+        messageId := mod(A_Index, textToSend.Length())
+        SendMessage(textToSend[messageId ? messageId : textToSend.Length()], 100)
 
         if IsInOrbiter
             CloseOrbiterChat(100)
