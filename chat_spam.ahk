@@ -10,18 +10,19 @@ ui_theme := ui_theme.voidTheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Globals               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-textToSend := [     "Cat :poop: 1"
-                ,   "Cat :poop: 2"
-                ,   "Cat :poop: 3"]
-cooldownInSec := 5
+global textToSend := [  "Cat :poop: 1"
+                    ,   "Cat :poop: 2"
+                    ,   "Cat :poop: 3"]
+global cooldownInSec    := 5
+
+global IsInOrbiter      := False
+global IsWarframeChat   := True
+global shouldAltTab     := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Macros                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ChatSpamKey     = F2
-IsInOrbiter     := False
-InGameChat      := True
-shouldAltTab    := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Hotkeys               ;;
@@ -44,73 +45,30 @@ ui[1].new_text("Cooldown", "chat", "auto", "title", "dadada")
 ui[1].show()
 return
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               Source                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ChatSpam:
-    WinGet, winId ,, A
-
-    if InGameChat
-    {
-        if (shouldAltTab)
-            WinActivate, ahk_exe Warframe.x64.exe
-
-        SendInput % chatKey
-        Sleep 50
-    }
-
-    SendInput % "{Text}"textToSend[1]
-    Sleep 50
-    SendInput, {Enter}
-    Sleep 50
-
-    if IsInOrbiter
-    {
-        SendInput, {Esc}
-        Sleep 50
-    }
-
-    afkTimer := 0
-    SetTimer, UpdateAftTimer, 1000
-
-    if InGameChat
-    {
-        if shouldAltTab
-            WinActivate, ahk_id %winId%  
-    }
-
-    Sleep cooldownInSec * 1000
-    WinGet, winId ,, A
-
     loop
     {
-        SetTimer, UpdateAftTimer, Delete
+        WinGet, winId ,, A
 
-        if InGameChat
-        {
-            if (shouldAltTab)
-                WinActivate, ahk_exe Warframe.x64.exe
-
-            SendInput % chatKey
-            Sleep 50
-        }
-        
-        SendInput % "{Text}"textToSend[mod(A_Index, textToSend.Length())+1]
-        Sleep 50
-        SendInput, {Enter}
-        Sleep 50
+        if shouldAltTab
+            GoSub, OpenWarframeWindow
+    
+        if IsWarframeChat
+            GoSub, SafeOpenChat
+    
+        SendMessage(textToSend[mod(A_Index, textToSend.Length())], 100)
 
         if IsInOrbiter
-        {
-            SendInput, {Esc}
-            Sleep 50
-        }
+            CloseOrbiterChat(100)
 
         afkTimer := 0
-        SetTimer, UpdateAftTimer, 1000
+        SetTimer, UpdateAfkTimer, 1000
 
-        if InGameChat
-        {
-            if shouldAltTab
-                WinActivate, ahk_id %winId%  
-        }
+        if shouldAltTab
+            OpenLastFoundWindow(winId)
 
         Sleep cooldownInSec * 1000
         WinGet, winId ,, A
@@ -118,15 +76,46 @@ ChatSpam:
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                Utils                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SendMessage(message, delay = 50)
+{
+    SendInput % "{Text}"message
+    Sleep % delay
+    SendInput, {Enter}
+    Sleep % delay
+}
+
+OpenWarframeWindow:
+    WinActivate, ahk_exe Warframe.x64.exe
+return
+
+OpenLastFoundWindow(windowId)
+{
+    WinActivate, ahk_id %windowId%
+}
+
+SafeOpenChat:
+    SendInput % chatKey
+    Sleep 150
+return
+
+CloseOrbiterChat(delay = 50)
+{
+    SendInput, {Esc}
+    Sleep % delay
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Timers                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-UpdateAftTimer:
+UpdateAfkTimer:
     afkTimer += 1
     timeDisplay := cooldownInSec - afkTimer
 
     if (timeDisplay <= 0)
     {
-        SetTimer, UpdateAftTimer, off
+        SetTimer, UpdateAfkTimer, off
         ui[1].edit_text("Cooldown", "xx")
         return
     }
@@ -138,3 +127,4 @@ return
 ;;                Misc                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 *Insert::reload
+*Del::exitapp
