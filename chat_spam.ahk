@@ -3,9 +3,11 @@ ui_theme := ui_theme.voidTheme
 
 #include %A_AppData%\LazyHub\lib
 
-#include game_settings.ahk
 #include headers.ahk
+#include game_settings.ahk
+
 #include custom_ui.ahk
+#include timers.ahk
 #include utils.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
