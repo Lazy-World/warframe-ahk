@@ -3,24 +3,17 @@ ui_theme := ui_theme.voidTheme
 
 #include %A_AppData%\LazyHub\lib
 
+#include game_settings.ahk
 #include headers.ahk
+#include custom_ui.ahk
 #include timers.ahk
 #include utils.ahk
-#include custom_ui.ahk
-
-#include game_settings.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Globals               ;;
+;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-cooldownInSec   := 20
-shouldAltTab    := True
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Macros                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-AfkNovaKey      = F2
-AnomalySpamKey  = o
+global g_CurScriptName := StrSplit(A_Scriptname, ".").1
+#include settings\%g_CurScriptName%_cfg.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Hotkeys               ;;

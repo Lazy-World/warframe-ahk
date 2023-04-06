@@ -19,33 +19,19 @@ ui_theme.insert("infoSZ", 13)
 
 #include %A_AppData%\LazyHub\lib
 
+#include game_settings.ahk
 #include headers.ahk
+#include custom_ui.ahk
 #include timers.ahk
 #include utils.ahk
-#include custom_ui.ahk
-
-#include game_settings.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Globals               ;;
+;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_desiredLimb := -20 ; equals to "-0.020" in Yate
-global g_propaExplodeTime  := 1610 ; depends on host FPS 
-global g_step := 5
+global g_CurScriptName := StrSplit(A_Scriptname, ".").1
+#include settings\%g_CurScriptName%_cfg.ahk
 
-global g_eidolonSpawnDelay := 200 ; depends on client PING
-
-; Math
 global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                Binds                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-AntiDesyncKey   = XButton2
-IncreaseTimeKey = Down
-DecreaseTimeKey = Left
-EnergyDrainKey  = F5
-WaterShieldKey  = Numpad0
 
 ; Technical part
 #IfWinActive ahk_exe Warframe.x64.exe

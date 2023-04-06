@@ -2,27 +2,17 @@ global ui_theme := {voidTheme: {winOL: "ADADAD", alpOL: 255, winBG: "151515", al
 ui_theme := ui_theme.voidTheme
 
 #include %A_AppData%\LazyHub\lib
+
+#include game_settings.ahk
 #include headers.ahk
 #include custom_ui.ahk
-#include game_settings.ahk
 #include utils.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Globals               ;;
+;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global textToSend := [  "Cat :poop: 1"
-                    ,   "Cat :poop: 2"
-                    ,   "Cat :poop: 3"]
-global cooldownInSec    := 5
-
-global IsInOrbiter      := False
-global IsWarframeChat   := True
-global shouldAltTab     := True
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Macros                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-ChatSpamKey     = F2
+global g_CurScriptName := StrSplit(A_Scriptname, ".").1
+#include settings\%g_CurScriptName%_cfg.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Hotkeys               ;;
