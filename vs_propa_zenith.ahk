@@ -34,7 +34,6 @@ global g_propaExplodeTime  := 1610 ; depends on host FPS
 global g_step := 5
 
 global g_eidolonSpawnDelay := 200 ; depends on client PING
-global g_waterLimbTime := 500 ; Water limb time
 
 ; Math
 global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
@@ -201,6 +200,7 @@ WaterShield:
     
     GoSub, Shard
     SetTimer, Shard, 10
+
     lSleep(g_eidolonSpawnDelay)
 
     ; MID portal part
@@ -247,14 +247,6 @@ WaterShield:
         lSleep(10)
     }
     BlockInput, OFF
-
-    ; AUTOMATE second limb
-    SetTimer, WaterLimbTime, -250
-
-    lSleep(8000)
-    lSleep(g_cooldown + g_propaExplodeTime + g_waterLimbTime + Clamp(g_desiredLimb, -20, g_desiredLimb), afterShardDetection)
-    UpdateTimer(afterShardDetection)
-    Gosub, AntiDesync
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -262,15 +254,6 @@ return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Shard:
     SendInput, {Blind}{%useKey%}
-return
-
-WaterLimbTime:
-    InputBox, limbTime, Debil, cat,, 100, 100, 980, 540
-
-    if ErrorLevel
-        return
-
-    g_waterLimbTime := limbTime
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
