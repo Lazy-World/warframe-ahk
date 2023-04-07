@@ -29,8 +29,8 @@ ui_theme.insert("infoSZ", 13)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_CurScriptName := StrSplit(A_Scriptname, ".").1
-#include settings\%g_CurScriptName%_cfg.ahk
+g_CurScriptName := StrSplit(A_Scriptname, ".").1
+#include ..\workshop\settings\cfg_%A_Scriptname%
 
 global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
 

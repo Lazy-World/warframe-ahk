@@ -13,8 +13,8 @@ ui_theme := ui_theme.voidTheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_CurScriptName := StrSplit(A_Scriptname, ".").1
-#include settings\%g_CurScriptName%_cfg.ahk
+g_CurScriptName := StrSplit(A_Scriptname, ".").1
+#include ..\workshop\settings\cfg_%A_Scriptname%
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Hotkeys               ;;
