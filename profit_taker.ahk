@@ -21,11 +21,11 @@ ui_theme.insert("infoSZ", 13)
 #include %A_AppData%\LazyHub\lib
 
 #include headers.ahk
+#include game_settings.ahk
+
 #include timers.ahk
 #include utils.ahk
 #include custom_ui.ahk
-
-#include game_settings.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Globals               ;;
@@ -38,7 +38,7 @@ voltSetups.item["volt"] := {"duration": 172, "strength": 309}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                Binds                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-RapidFireKey            = ~LButton & RButton
+RapidFireKey            = F4
 CastVoltSkillsKey       = F1
 dpsModeKey              = F2
 ThrowMeleeKey           = XButton2 		
@@ -55,7 +55,7 @@ Hotkey, IfWinActive, ahk_exe Warframe.x64.exe
 ;;               Hotkeys               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Hotkey, *%CastVoltSkillsKey%, CastVoltSkills
-Hotkey, %RapidFireKey%, RapidFire 
+Hotkey, *%RapidFireKey%, RapidFire 
 Hotkey, *%ThrowMeleeKey%, ThrowMelee
 Hotkey, *%VasarinDashKey%, VasarinDash
 Hotkey, *%FasterArchwingKey%, FasterArchwing
@@ -81,7 +81,7 @@ gPosY := Ceil(gScreen[2] * 0.47)
 ui.push(new Window("pt_title", gPosX, gPosY, gGuiW, gGuiH, ui_theme, 3.132))
 ui.push(new Window("pt_body", gPosX, gPosY+ui[1].h+4, gGuiW, gGuiH*2, ui_theme, 3.132))
 
-ui[1].new_text("T1", "lazy", "auto", "title")
+ui[1].new_text("T1", "P.T", "auto", "title")
 ui[2].new_text("T2", "speed", "xs ym+3", "main")
 ui[2].new_text("T3", "eclipse", "xs ym+24", "info")
 
@@ -94,9 +94,9 @@ return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RapidFire:
     loop
-        if ( GetKeyState("LButton", "P") and GetKeyState("RButton", "P") )
+        if ( GetKeyState(RapidFireKey, "P") )
         {
-            SendInput {Blind}{%shootKey%}
+            SendInput {Blind}{LButton}
             lSleep(25)
         }
     else
@@ -105,13 +105,13 @@ return
 
 ThrowMelee:
 	SendInput {Blind}{%jumpKey%}
-	lSleep(minSleepTime)
+	lSleep(25)
 	SendInput {Blind}{%jumpKey%}
-	lSleep(minSleepTime)
+	lSleep(25)
 	SendInput {Blind}{%aimKey% Down}
-	lSleep(minSleepTime)
+	lSleep(25)
 	SendInput {Blind}{%meleeKey%}
-	lSleep(minSleepTime)
+	lSleep(25)
 	SendInput {Blind}{%aimKey% Up}
 	lSleep(500)
 return
@@ -176,7 +176,7 @@ FasterArchwing:
 return
 
 dpsMode:
-    ; idk
+    
 return
 
 BackToWarframe:
@@ -252,6 +252,6 @@ SetupVoltBuild(build_name) {
 
 *F11::
     suspend, toggle
-    state := A_IsSuspended ? "pause" : "lazy"
+    state := A_IsSuspended ? "pause" : "P.T"
     ui[1].edit_text("T1", state)
 return
