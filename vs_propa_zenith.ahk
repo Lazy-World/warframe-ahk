@@ -20,33 +20,19 @@ ui_theme.insert("infoSZ", 13)
 #include %A_AppData%\LazyHub\lib
 
 #include headers.ahk
-#include timers.ahk
-#include utils.ahk
-#include custom_ui.ahk
-
 #include game_settings.ahk
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               Globals               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global g_waterShieldDelay := 200 ; depends on client PING
-
-global g_desiredLimb := -15 ; equals to "-0.015" in Yate
-global g_raplakDelay := 1610 ; depends on host FPS 
-
-global g_step := 5
-
-; Math
-global g_cooldown := 17186 - g_raplakDelay + g_desiredLimb - 1
+#include custom_ui.ahk
+#include timers.ahk
+#include utils.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                Binds                ;;
+;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-AntiDesyncKey   = XButton2
-IncreaseTimeKey = Down
-DecreaseTimeKey = Left
-EnergyDrainKey  = F5
-WaterShieldKey  = Numpad0
+g_CurScriptName := StrSplit(A_Scriptname, ".").1
+#include ..\workshop\settings\cfg_%A_Scriptname%
+
+global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
 
 ; Technical part
 #IfWinActive ahk_exe Warframe.x64.exe
@@ -113,7 +99,7 @@ AntiDesync:
         lSleep(700)
         SendInput, {Blind}{%switchKey%}
         
-        lSleep(g_raplakDelay, beforePropa)
+        lSleep(g_propaExplodeTime , beforePropa)
 
         DllCall("QueryPerformanceCounter", "Int64*", beforeRaplak)
         SendInput, {Blind}{%shootKey%}
@@ -201,7 +187,8 @@ WaterShield:
     
     GoSub, Shard
     SetTimer, Shard, 10
-    lSleep(g_waterShieldDelay)
+
+    lSleep(g_eidolonSpawnDelay)
 
     ; MID portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
