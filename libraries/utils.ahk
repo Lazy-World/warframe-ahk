@@ -1,3 +1,9 @@
+; Accurate values
+global minSleepTime := Clamp(Round(1000 / fps), 1, 60)
+
+global gScreen := Array( Ceil(A_ScreenWidth), Ceil(A_ScreenHeight) )
+global gScreenCenter := Array( Ceil(A_ScreenWidth / 2), Ceil(A_ScreenHeight / 2) )
+
 ; Excludes stupid values' usage
 Clamp(num, min, max) 
 {
@@ -11,12 +17,8 @@ ResetCursor()
 
 MouseMove(move_x, move_y) 
 {
-    DllCall("mouse_event", "UInt", 0x01, "Int", move_x, "Int", move_y, "UInt", 0, "Int", 0)
+    ScaledX := move_x * 1920 / gScreen[1]
+    ScaledY := move_y * 1080 / gScreen[2]
+    DllCall("mouse_event", "UInt", 0x01, "Int", ScaledX, "Int", ScaledY, "UInt", 0, "Int", 0)
     return
 }
-
-; Accurate values
-minSleepTime := Clamp(Round(1000 / fps), 1, 60)
-
-gScreen := Array( Ceil(A_ScreenWidth), Ceil(A_ScreenHeight) )
-gScreenCenter := Array( Ceil(A_ScreenWidth / 2), Ceil(A_ScreenHeight / 2) )
