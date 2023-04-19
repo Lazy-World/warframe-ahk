@@ -1,11 +1,23 @@
 ; @Value
-g_desiredLimb := -20 ; Limb time (ms)
+g_desiredLimb := 0 ; Limb time (ms)
 
 ; @Value
-g_propaExplodeTime  := 1610 ; Propa explode time (ms)
+g_propaExplodeTime  := 1615 ; Propa explode time (ms)
 
 ; @Value
 g_step := 5 ; Inc/Dec limb time (ms)
+
+; @MouseMove
+mouseMove1 := [-408 , 204] ; MID -> CL portal
+
+; @MouseMove
+mouseMove2 := [929, 42] ; CL -> CR portal
+
+; @MouseMove
+mouseMove3 := [-1087 , -9] ; CR -> Med-Tower
+
+; @MouseMove
+mouseMove4 := [-887 , 490] ; Med-Tower -> Eidolon Limb
 
 ; @Value
 g_eidolonSpawnDelay := 200 ; Eidolon spawn delay (ms)

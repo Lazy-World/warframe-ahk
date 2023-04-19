@@ -168,34 +168,32 @@ WaterShield:
         PixelSearch,,, startX, startY, endX, endY, 0xB51715, 15, Fast RGB ; 0xAD3932
     }
     until (ErrorLevel == 0)
-
-    BlockInput, On
-
+    
+    BlockInput, ON
+    DllCall("QueryPerformanceCounter", "Int64*", afterShardDetection)
+    
     GoSub, Shard
     SetTimer, Shard, 10
-    
+
     lSleep(g_eidolonSpawnDelay)
 
     ; MID portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-
-    MouseMove(-408 , 204)
+    MouseMove(mouseMove1[1], mouseMove1[2])
     lSleep(525, beforePropa)
 
     ; CL portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-
-    MouseMove(929, 42)
-    lSleep(580, beforePropa)
+    MouseMove(mouseMove2[1], mouseMove2[2])
+    lSleep(525, beforePropa)
 
     ; CR portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-
-    MouseMove(-1087 , -9)
-    lSleep(275, beforePropa)
+    MouseMove(mouseMove3[1], mouseMove3[2])
+    lSleep(300, beforePropa)
 
     ; UNSTUCK part
     SetTimer, Shard, Off
@@ -204,27 +202,24 @@ WaterShield:
     SendInput, {Text}/unstuck
     lSleep(15)
     SendInput, {Enter}
-    lSleep(520, beforePropa)
 
-    ; LONG spawn part
+    ; LONG propa to med-tower
+    lSleep(520, beforePropa)
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
     SendInput, {Blind}{%meleeKey%}
 
-    MouseMove(-887 , 490)
+    ; LONG zenith limb
+    MouseMove(mouseMove4[1], mouseMove4[2])
     lSleep(20, beforePropa)
     SendInput, {Blind}{%emoteKey%}
+    lSleep(70, beforePropa)
 
-    SendInput, {Blind}{%aimKey% Down}
-    lSleep(100, beforePropa)
-
-    Loop, 35
+    Loop, 130
     {
         SendInput, {Blind}{%shootKey%}
         lSleep(10)
     }
-    SendInput {%aimKey% Up}
-
     BlockInput, OFF
 return
 

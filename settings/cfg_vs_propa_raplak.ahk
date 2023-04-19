@@ -10,6 +10,18 @@ g_step := 5 ; Inc/Dec limb time (ms)
 ; @Value
 g_eidolonSpawnDelay := 200 ; Eidolon spawn delay (ms)
 
+; @MouseMove
+mouseMove1 := [-408 , 204] ; MID -> CL portal
+
+; @MouseMove
+mouseMove2 := [929, 42] ; CL -> CR portal
+
+; @MouseMove
+mouseMove3 := [-1087 , -9] ; CR -> Med-Tower
+
+; @MouseMove
+mouseMove4 := [-887 , 490] ; Med-Tower -> Eidolon Limb
+
 ; @Bind
 AntiDesyncKey   = XButton2 ; Enable anti-desync
 

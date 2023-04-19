@@ -5,7 +5,7 @@ ChatSpamKey      = F2 ; Enable chat spam
 textToSend := ["Cat :poop: 1", "Cat :poop: 2", "Cat :poop: 3"] ; Messages
 
 ; @Value
-cooldownInSec := 5 ; Delay between messages (sec)
+cooldownInSec := 2 ; Delay between messages (sec)
 
 ; @Boolean
 IsInOrbiter      := False ; Orbiter

@@ -193,19 +193,19 @@ WaterShield:
     ; MID portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-    MouseMove(-408 , 204)
+    MouseMove(mouseMove1[1], mouseMove1[2])
     lSleep(525, beforePropa)
 
     ; CL portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-    MouseMove(929, 42)
+    MouseMove(mouseMove2[1], mouseMove2[2])
     lSleep(525, beforePropa)
 
     ; CR portal part
     DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
     SendInput, {Blind}{%shoot2Key%}
-    MouseMove(-1087 , -9)
+    MouseMove(mouseMove3[1], mouseMove3[2])
     lSleep(300, beforePropa)
 
     ; UNSTUCK part
@@ -223,7 +223,7 @@ WaterShield:
     SendInput, {Blind}{%meleeKey%}
 
     ; LONG zenith limb
-    MouseMove(-887 , 490)
+    MouseMove(mouseMove4[1], mouseMove4[2])
     lSleep(20, beforePropa)
     SendInput, {Blind}{%emoteKey%}
     lSleep(70, beforePropa)
