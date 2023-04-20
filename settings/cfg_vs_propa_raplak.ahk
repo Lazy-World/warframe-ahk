@@ -1,10 +1,12 @@
+; @Version 1
+
 ; @Title Script Settings
 
 ; @Value
 g_desiredLimb := -20 ; Limb time (ms)
 
 ; @Value
-g_propaExplodeTime  := 1610 ; Propa explode time (ms)
+g_propaExplodeTime := 1610 ; Propa explode time (ms)
 
 ; @Value
 g_step := 5 ; Inc/Dec limb time (ms)
@@ -29,7 +31,7 @@ mouseMove4 := [-887 , 490] ; Med-Tower -> Eidolon Limb
 ; @Title Keybinds
 
 ; @Bind
-AntiDesyncKey   = XButton2 ; Enable anti-desync
+AntiDesyncKey = XButton2 ; Enable anti-desync
 
 ; @Bind
 IncreaseTimeKey = Down ; Increase limb time
@@ -38,7 +40,7 @@ IncreaseTimeKey = Down ; Increase limb time
 DecreaseTimeKey = Left ; Decrease limb time
 
 ; @Bind
-EnergyDrainKey  = F5 ; Energy drain
+EnergyDrainKey = F5 ; Energy drain
 
 ; @Bind
-WaterShieldKey  = Numpad0 ; Watershield
+WaterShieldKey = Numpad0 ; Watershield

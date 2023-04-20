@@ -1,11 +1,13 @@
+; @Version 1
+
 ; @Value
-cooldownInSec   := 20 ; Delay before recast
+cooldownInSec := 20 ; Delay before recast
 
 ; @Boolean
-shouldAltTab    := True ; Focus on Warframe
+shouldAltTab := True ; Focus on Warframe
 
 ; @Bind
-AfkNovaKey      = F2 ; Automatic cast 
+AfkNovaKey = F2 ; Automatic cast 
 
 ; @Bind
-AnomalySpamKey  = o ; Magus Anomaly spam
+AnomalySpamKey = o ; Magus Anomaly spam
