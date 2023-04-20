@@ -14,4 +14,4 @@ IsInOrbiter      := False ; Orbiter
 IsWarframeChat   := True ; Warframe chat
 
 ; @Boolean
-shouldAltTab     := True ; Focus on game
+shouldAltTab     := True ; Focus on Warframe

@@ -2,7 +2,7 @@
 cooldownInSec   := 20 ; Delay before recast
 
 ; @Boolean
-shouldAltTab    := True ; Focus on game
+shouldAltTab    := True ; Focus on Warframe
 
 ; @Bind
 AfkNovaKey      = F2 ; Automatic cast 

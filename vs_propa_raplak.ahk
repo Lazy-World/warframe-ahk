@@ -1,3 +1,5 @@
+SetWorkingDir, %A_ScriptDir%
+
 global ui_theme := {}
 
 ui_theme.insert("winOL", "ADADAD")
@@ -17,20 +19,17 @@ ui_theme.insert("info", "Montserrat Medium")
 ui_theme.insert("infoCol", "FFF6BD")
 ui_theme.insert("infoSZ", 13)
 
-#include %A_AppData%\LazyHub\lib
+#include libraries\headers.ahk
+#include libraries\game_settings.ahk
 
-#include headers.ahk
-#include game_settings.ahk
-
-#include custom_ui.ahk
-#include timers.ahk
-#include utils.ahk
+#include libraries\custom_ui.ahk
+#include libraries\timers.ahk
+#include libraries\utils.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-g_CurScriptName := StrSplit(A_Scriptname, ".").1
-#include ..\workshop\settings\cfg_%A_Scriptname%
+#include settings\cfg_%A_Scriptname%
 
 global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
 

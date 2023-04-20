@@ -1,20 +1,19 @@
+SetWorkingDir, %A_ScriptDir%
+
 global ui_theme := {voidTheme: {winOL: "ADADAD", alpOL: 255, winBG: "151515", alpBG: 180, title: "Montserrat Medium", titleCol: "86C8BC", titleSZ: 13, main: "Montserrat Medium", mainCol: "White", mainSZ: 13, info: "Montserrat Medium", infoCol: "FFF6BD", infoSZ: 13}}
 ui_theme := ui_theme.voidTheme
 
-#include %A_AppData%\LazyHub\lib
+#include libraries\headers.ahk
+#include libraries\game_settings.ahk
 
-#include headers.ahk
-#include game_settings.ahk
-
-#include custom_ui.ahk
-#include timers.ahk
-#include utils.ahk
+#include libraries\custom_ui.ahk
+#include libraries\timers.ahk
+#include libraries\utils.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-g_CurScriptName := StrSplit(A_Scriptname, ".").1
-#include ..\workshop\settings\cfg_%A_Scriptname%
+#include settings\cfg_%A_Scriptname%
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Hotkeys               ;;
