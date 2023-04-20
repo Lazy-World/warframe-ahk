@@ -1,4 +1,4 @@
-SetWorkingDir, %A_ScriptDir%
+#include %A_ScriptDir%
 
 global ui_theme := {}
 
