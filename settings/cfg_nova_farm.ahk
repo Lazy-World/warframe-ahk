@@ -11,6 +11,3 @@ AfkNovaKey = F2 ; Automatic cast
 
 ; @Bind
 AnomalySpamKey = o ; Magus Anomaly spam
-
-; @Bind
-AnomalySpamKey2 = k ; Test
