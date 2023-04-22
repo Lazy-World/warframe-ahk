@@ -1,5 +1,3 @@
-; @Version 1
-
 ; @Bind
 ChatSpamKey = F2 ; Enable chat spam
 

@@ -1,5 +1,3 @@
-; @Version 1
-
 ; @Value
 cooldownInSec := 20 ; Delay before recast
 

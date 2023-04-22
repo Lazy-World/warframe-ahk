@@ -1,5 +1,3 @@
-; @Version 1
-
 ; @Title Script Settings
 
 ; @Value
