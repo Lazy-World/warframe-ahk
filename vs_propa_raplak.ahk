@@ -106,6 +106,9 @@ AntiDesync:
         SendInput, {Blind}{%shootKey%}
         Sleep 4000
 
+        if A_Index = 5
+            return
+
         UpdateTimer(beforePropa, beforeRaplak)
         lSleep(14000, beforeRaplak)
         
@@ -127,8 +130,6 @@ AntiDesync:
         lSleep(g_cooldown, beforeRaplak)
         UpdateTimer(beforeRaplak)
     }
-    beforePropa := 0, afterPropa := 0
-    beforeRaplak := 0
 return
 
 IncreaseTime:
