@@ -15,6 +15,9 @@ ui_theme := ui_theme.voidTheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #include settings\cfg_%A_Scriptname%
 
+Hotkey, *%MiscReloadMacroKey%, MiscReloadMacro
+Hotkey, *%MiscUnloadMacroKey%, MiscUnloadMacro
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Hotkeys               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -125,5 +128,10 @@ return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                Misc                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-*Insert::reload
-*Del::exitapp
+MiscReloadMacro:
+    reload
+return
+
+MiscUnloadMacro:
+    exitapp
+return

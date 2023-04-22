@@ -31,6 +31,10 @@ ui_theme.insert("infoSZ", 13)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #include settings\cfg_%A_Scriptname%
 
+Hotkey, *%MiscReloadMacroKey%, MiscReloadMacro
+Hotkey, *%MiscUnloadMacroKey%, MiscUnloadMacro
+Hotkey, *%MiscPauseMacroKey%, MiscPauseMacro
+
 global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
 
 ; Technical part
@@ -94,6 +98,8 @@ AntiDesync:
         SendInput, {Blind}{%shoot2Key%}
         DllCall("QueryPerformanceCounter", "Int64*", afterPropa)
 
+        lSleep(g_propaExplodeTime - g_msBeforePropaExplode, beforePropa)
+        SendInput, {Blind}{%secondAKey%}
         lSleep(g_propaExplodeTime, beforePropa)
 
         DllCall("QueryPerformanceCounter", "Int64*", beforeRaplak)
@@ -101,8 +107,10 @@ AntiDesync:
         Sleep 4000
 
         UpdateTimer(beforePropa, beforeRaplak)
-        lSleep(14700, beforeRaplak)
+        lSleep(14000, beforeRaplak)
         
+        GoSub, EnergyDrain
+
         GuiControl, gui_debug:Text, DebugText, paused
         Hotkey, *%IncreaseTimeKey%, off
         Hotkey, *%DecreaseTimeKey%, off
@@ -111,6 +119,10 @@ AntiDesync:
 
         Hotkey, *%IncreaseTimeKey%, on
         Hotkey, *%DecreaseTimeKey%, on
+
+        SendInput, {Blind}{%energyPadKey%}
+        lSleep(100)
+        SendInput, {Blind}{%secondAKey%}
 
         lSleep(g_cooldown, beforeRaplak)
         UpdateTimer(beforeRaplak)
@@ -233,10 +245,16 @@ return
 ;;                Misc                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #IfWinActive
-*Insert::reload
-*Del::exitapp
 
-*F11::
+MiscReloadMacro:
+    reload
+return
+
+MiscUnloadMacro:
+    exitapp
+return
+
+MiscPauseMacro:
     suspend, toggle
     state := A_IsSuspended ? "pause" : "lazy"
     ui[1].edit_text("T1", state)

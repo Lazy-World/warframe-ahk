@@ -14,19 +14,8 @@ g_step := 5 ; Inc/Dec limb time (ms)
 ; @Value
 g_eidolonSpawnDelay := 200 ; Eidolon spawn delay (ms)
 
-; @Title Mouse move section
-
-; @MouseMove
-mouseMove1 := [-408 , 204] ; MID -> CL portal
-
-; @MouseMove
-mouseMove2 := [929, 42] ; CL -> CR portal
-
-; @MouseMove
-mouseMove3 := [-1087 , -9] ; CR -> Med-Tower
-
-; @MouseMove
-mouseMove4 := [-887 , 490] ; Med-Tower -> Eidolon Limb
+; @Value
+g_msBeforePropaExplode := 150 ; Anti-knockdown (ms)
 
 ; @Title Keybinds
 
@@ -44,3 +33,28 @@ EnergyDrainKey = F5 ; Energy drain
 
 ; @Bind
 WaterShieldKey = Numpad0 ; Watershield
+
+; @Title Misc
+
+; @Bind
+MiscReloadMacroKey = Insert ; Reload macros
+
+; @Bind
+MiscUnloadMacroKey = Del ; Unload macros
+
+; @Bind
+MiscPauseMacroKey = F11 ; Pause / Unpause
+
+; @Title Mouse move section
+
+; @MouseMove
+mouseMove1 := [-408 , 204] ; MID -> CL portal
+
+; @MouseMove
+mouseMove2 := [929, 42] ; CL -> CR portal
+
+; @MouseMove
+mouseMove3 := [-1087 , -9] ; CR -> Med-Tower
+
+; @MouseMove
+mouseMove4 := [-887 , 490] ; Med-Tower -> Eidolon Limb

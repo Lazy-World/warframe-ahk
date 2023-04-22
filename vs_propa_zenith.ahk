@@ -31,6 +31,10 @@ ui_theme.insert("infoSZ", 13)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #include settings\cfg_%A_Scriptname%
 
+Hotkey, *%MiscReloadMacroKey%, MiscReloadMacro
+Hotkey, *%MiscUnloadMacroKey%, MiscUnloadMacro
+Hotkey, *%MiscPauseMacroKey%, MiscPauseMacro
+
 global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
 
 ; Technical part
@@ -246,10 +250,16 @@ return
 ;;                Misc                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #IfWinActive
-*Insert::reload
-*Del::exitapp
 
-*F11::
+MiscReloadMacro:
+    reload
+return
+
+MiscUnloadMacro:
+    exitapp
+return
+
+MiscPauseMacro:
     suspend, toggle
     state := A_IsSuspended ? "pause" : "lazy"
     ui[1].edit_text("T1", state)

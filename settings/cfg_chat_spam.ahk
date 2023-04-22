@@ -17,3 +17,11 @@ IsWarframeChat := True ; Warframe chat
 
 ; @Boolean
 shouldAltTab := True ; Focus on Warframe
+
+; @Title Misc
+
+; @Bind
+MiscReloadMacroKey = Insert ; Reload macros
+
+; @Bind
+MiscUnloadMacroKey = Del ; Unload macros
