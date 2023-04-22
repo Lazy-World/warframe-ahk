@@ -144,7 +144,7 @@ DecreaseTime:
 return
 
 EnergyDrain:
-    SendInput, {Blind}{%shiftKey% Down}
+    SendInput, {Blind}{%sprintKey% Down}
     lSleep(10)
     
     Loop, 18
@@ -153,7 +153,7 @@ EnergyDrain:
         SendInput, {Blind}{%shootKey%}
         lSleep(12)
     }
-    SendInput, {Blind}{%shiftKey% Up}
+    SendInput, {Blind}{%sprintKey% Up}
 return
 
 WaterShield:
