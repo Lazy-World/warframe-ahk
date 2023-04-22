@@ -117,7 +117,6 @@ AntiDesync:
         UpdateTimer(beforePropa, beforeRaplak)
         lSleep(14700, beforeRaplak)
         
-        GuiControl, gui_debug:Text, DebugText, paused
         Hotkey, *%IncreaseTimeKey%, off
         Hotkey, *%DecreaseTimeKey%, off
 

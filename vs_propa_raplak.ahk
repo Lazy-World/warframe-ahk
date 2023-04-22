@@ -114,7 +114,6 @@ AntiDesync:
         
         GoSub, EnergyDrain
 
-        GuiControl, gui_debug:Text, DebugText, paused
         Hotkey, *%IncreaseTimeKey%, off
         Hotkey, *%DecreaseTimeKey%, off
 
