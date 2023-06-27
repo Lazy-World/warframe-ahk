@@ -4,7 +4,7 @@ ChatSpamKey = F2 ; Enable chat spam
 
 ; @Tooltip Список сообщений, которые макрос будет отправлять в чат
 ; @Array
-textToSend = ["Cat :poop: 1", "Cat :poop: 2", "Cat :poop: 3"] ; Messages
+textToSend := ["Cat :poop: 1", "Cat :poop: 2", "Cat :poop: 3"] ; Messages
 
 ; @Tooltip Время между отправленными сообщениями
 ; @Value
