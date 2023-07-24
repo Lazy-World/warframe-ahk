@@ -409,7 +409,8 @@ class Slider {
     }
 
     set(val) {
-        GuiControl % this.name ":", % this.hwnd, % ceil((val - this.min) / (this.max - this.min) * 100)
+        new_val := ceil((val - this.min) / (this.max - this.min) * 100)
+        GuiControl % this.name ":", % this.hwnd, % clamp(new_val, 0, 100)
     }
 
     new_pos(new_pos) {
@@ -535,12 +536,14 @@ class Window {
     {       
         this.name := name
         this.pos := vec_pos
+        this.size := vec_size
         this.theme := theme
 
         no_bg               := NonNull_Ret(Config.no_bg         , 0)
         margin              := NonNull_Ret(Config.margin        , 2)
         this.border         := NonNull_Ret(Config.border        , 0)
         this.blur           := NonNull_Ret(Config.blur          , 0)
+        theme.alpBG         := NonNull_Ret(Config.alpha         , theme.alpBG)
 
         this.outline_cl     := NonNull_Ret(Config.ol_col        , this.theme.winOL)
         this.outline_al     := NonNull_Ret(Config.ol_alp        , this.theme.alpOL)
@@ -580,6 +583,13 @@ class Window {
 
     new_text(control_name, body, category, prop := "") {
         this.text_window.new_text(control_name, body, category, prop)
+    }
+
+    new_image(name) {
+        path =  %A_ScriptDir%\pictures\%name%
+        ; msgbox % path
+
+        Gui % this.name ": Add", Picture, % " w" this.size.x " h" this.size.y " x"0 " y"0 " AltSubmit BackgroundTrans", % path
     }
 
     slider(name) {
