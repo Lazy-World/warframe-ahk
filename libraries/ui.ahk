@@ -47,7 +47,7 @@ class Text {
     {
         static controls := {}
 
-        this.name := "txt" + name
+        this.name := "txt_" + name
         this.pos := vec_pos
         this.size := vec_size
         this.theme := theme
@@ -103,33 +103,40 @@ class Text {
     }
 
     measure(control_name) {
-        text := this.controls[control_name]["body"]
+        textBody := this.controls[control_name]["body"]
         fontName := this.controls[control_name]["font"]
-        fontSize := this.controls[control_name]["fontSZ"]
+        fontSize := "s" . this.controls[control_name]["fontSZ"]
+        
+        Static DT_FLAGS := 0x0520 ; DT_SINGLELINE = 0x20, DT_NOCLIP = 0x0100, DT_CALCRECT = 0x0400
+        Static WM_GETFONT := 0x31
 
-        ; Create a DC
-        hdc := DllCall("GetDC", "Ptr", 0, "Ptr")
+        Gui, New
+
+        If (fontSize <> "") || (FontName <> "")
+            Gui, Font, %fontSize%, %FontName%
+
+        Gui, Add, Text, hwndHWND
+        SendMessage, WM_GETFONT, 0, 0,, ahk_id %HWND%
+
+        HFONT := ErrorLevel
+        HDC := DllCall("User32.dll\GetDC", "Ptr", HWND, "Ptr")
+
+        DllCall("Gdi32.dll\SelectObject", "Ptr", HDC, "Ptr", HFONT)
+        VarSetCapacity(RECT, 16, 0)
+
+        DllCall("User32.dll\DrawText", "Ptr", HDC, "Str", textBody, "Int", -1, "Ptr", &RECT, "UInt", DT_FLAGS)
+        DllCall("User32.dll\ReleaseDC", "Ptr", HWND, "Ptr", HDC)
+
+        Gui, Destroy
+
+        width := NumGet(RECT, 8, "Int")
+        height := NumGet(RECT, 12, "Int")
         
-        ; Create a font
-        hFont := DllCall("CreateFont", "Int", fontSize, "Int", 0, "Int", 0, "Int", 0, "Int", 400, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "Str", fontName)
-        
-        ; Select the font into the DC
-        hOldFont := DllCall("SelectObject", "Ptr", hdc, "Ptr", hFont)
-        
-        ; Calculate the size of the text
-        VarSetCapacity(size, 8)
-        DllCall("GetTextExtentPoint32", "Ptr", hdc, "Str", text, "Int", StrLen(text), "Ptr", &size)
-        width := NumGet(size, 0, "Int") ; wirks incorrectly for separated text
-        height := NumGet(size, 4, "Int")
-        
-        ; Clean up
-        DllCall("SelectObject", "Ptr", hdc, "Ptr", hOldFont)
-        DllCall("DeleteObject", "Ptr", hFont)
-        DllCall("ReleaseDC", "Ptr", 0, "Ptr", hdc)
-        
-        return [width, height]
+        return [width+1, height]
     }
-
+        
+        
+        
     new_pos(params*) {
         if (params.Length() == 1) {
             this.pos := params[1]
@@ -206,6 +213,49 @@ class Text {
 
     show() {
         Gui % this.name ": Show", %  "x" this.pos.x+this.mtl " y" this.pos.y+this.mtl " w" this.size.x-this.mbr " h" this.size.y-this.mbr " NoActivate"
+    }
+
+    hide() {
+        Gui % this.name ": Hide"
+    }
+
+    __delete() {
+        Gui % this.name ": Destroy"
+    }
+}
+
+class Picture {
+    __new(ui_name, name, vec_pos, vec_size, Config := "") 
+    {
+        this.name := ui_name
+        this.pos := vec_pos
+        this.size := vec_size
+
+        this.bgCol          := NonNull_Ret(Config.color         , 0x151515)
+        this.bgAlp          := NonNull_Ret(Config.alpha         , 255)
+        this.add_x          := NonNull_Ret(Config.x             , 0)
+        this.add_y          := NonNull_Ret(Config.y             , 0)
+
+        myHwnd := this.name
+        titleString := "+AlwaysOnTop -Caption +LastFound -SysMenu +ToolWindow -DPIScale +E0x20"
+
+        Gui % this.name ": " titleString " +Hwnd"myHwnd
+        Gui % this.name ": Margin", 0, 0
+        Gui % this.name ": Color", %  this.bgCol
+
+        if this.bgAlp != 255
+            WinSet, Transparent, % this.bgAlp
+        else 
+            WinSet, TransColor, % this.bgCol
+
+        path =  %A_ScriptDir%\pictures\%name%
+        Gui % this.name ": Add", Picture, % " w" this.size.x " h" this.size.y " x" this.add_x " y" this.add_y " AltSubmit BackgroundTrans", % path
+
+        this.hwnd := %myHwnd%
+    }
+
+    show() {
+        Gui % this.name ": Show", %  "x" this.pos.x " y" this.pos.y " w" this.size.x " h" this.size.y " NoActivate"
     }
 
     hide() {
@@ -544,6 +594,11 @@ class Window {
         this.border         := NonNull_Ret(Config.border        , 0)
         this.blur           := NonNull_Ret(Config.blur          , 0)
         theme.alpBG         := NonNull_Ret(Config.alpha         , theme.alpBG)
+        this.bgCol          := NonNull_Ret(Config.bgCol         , theme.winBG)
+
+        this.picture        := NonNull_Ret(Config.pic           , "")
+        add_x               := NonNull_Ret(Config.pmx           , 0)
+        add_y               := NonNull_Ret(Config.pmy           , 0)
 
         this.outline_cl     := NonNull_Ret(Config.ol_col        , this.theme.winOL)
         this.outline_al     := NonNull_Ret(Config.ol_alp        , this.theme.alpOL)
@@ -565,7 +620,11 @@ class Window {
                 , "blur": this.blur
                 , "border": this.border})
 
-        this.window := new Line(name, vec_pos, vec_size, {"color": theme.winBG, "alpha": theme.alpBG, "no_bg": no_bg})
+        if this.picture != ""
+            this.window := new Picture("pic_" + name, this.picture, vec_pos, vec_size, {"color": theme.winBG, "alpha": theme.alpBG, "x": add_x, "y": add_y})
+        else
+            this.window := new Line(name, vec_pos, vec_size, {"color": theme.winBG, "alpha": theme.alpBG, "no_bg": no_bg})
+
         this.text_window := new Text(name, vec_pos, vec_size, theme, {"margin": margin})
 
         this.outline_elements := []
@@ -583,13 +642,6 @@ class Window {
 
     new_text(control_name, body, category, prop := "") {
         this.text_window.new_text(control_name, body, category, prop)
-    }
-
-    new_image(name) {
-        path =  %A_ScriptDir%\pictures\%name%
-        ; msgbox % path
-
-        Gui % this.name ": Add", Picture, % " w" this.size.x " h" this.size.y " x"0 " y"0 " AltSubmit BackgroundTrans", % path
     }
 
     slider(name) {
@@ -844,7 +896,7 @@ class Ui {
     show() {
         for name, window_obj in this.windows
             window_obj.show()
-    } 
+    }
 
     hide() {
         for name, window_obj in this.windows
