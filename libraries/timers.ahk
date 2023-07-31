@@ -39,9 +39,10 @@ lSleep(s_time, ByRef start = "") {
 ; the return statement returns the time actually slept, will slow down the sleep marginally
 
 
-MeasureTime(ByRef begin, ByRef end) {
+MeasureTime(ByRef begin, ByRef t_end := "") {
     Frequency ? Frequency : DllCall("QueryPerformanceFrequency", "Int64*", Frequency)
-    return Round(( 1000 * (end - begin) / Frequency), 3)
+    t_end ? t_end : DllCall("QueryPerformanceCounter", "Int64*", t_end)
+    return Round(( 1000 * (t_end - begin) / Frequency), 3)
 }
 
 ; begin/end = pass in two QPC timestamps as variables, returns a rounded difference, mostly a helper func
