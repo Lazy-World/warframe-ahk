@@ -405,22 +405,20 @@ class Slider {
     run(Config := "") {
         this.min            := NonNull_Ret(Config.min           , this.min)
         this.max            := NonNull_Ret(Config.max           , this.max)
-        ext                 := NonNull_Ret(Config.ext           , -1)
+        start               := NonNull_Ret(Config.ext           , -1)
 
-        DATA := []
-        
-        if ext != -1
-            lostTime := MeasureTime(ext)
-        else {
-            DllCall("QueryPerformanceCounter", "Int64*", ext)
-            lostTime := 0
-        }
-        
+        lostTime := 0
+        if start != -1
+            lostTime := MeasureTime(start)
+
         duration := this.max - this.min - lostTime
         steps := 100
 
         stepSize := duration / steps
         inc := 1
+
+        if stepSize <= 0
+            return
 
         while 15.6 >= stepSize
         {
@@ -428,19 +426,19 @@ class Slider {
             inc := inc * 2
         }
 
-        DATA.push(stepSize)
-        DATA.push(inc)
-
         timerCount := 1
         stepSize := stepSize * 0.94
 
         SetTimer, tmpLabel, % stepSize
-        Critical, On
-            lSleep(this.max - this.min, ext)
+        Critical
+            if start != -1
+                lSleep(this.max - this.min, start)
+            else
+                lSleep(this.max - this.min)
         Critical, Off
         SetTimer, tmpLabel, Off
 
-        return DATA
+        return
         
         tmpLabel:
             timerCount := timerCount + inc
