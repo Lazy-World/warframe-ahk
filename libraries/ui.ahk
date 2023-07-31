@@ -85,7 +85,7 @@ class Text {
         fontColor := this.theme[category "Col"]
 
         Gui % this.name ": Font", % "s" fontSize " q4", % fontName
-        Gui % this.name ": Add",% "Text", % " " prop " w" this.size.x-this.mbr " 0x200 Hwnd"control_name " c" fontColor, % body
+        Gui % this.name ": Add",% "Text", % " " prop " w" this.size.x-this.mbr " BackgroundTrans 0x200 Hwnd"control_name " c" fontColor, % body
         this.controls[control_name] := {"control": %control_name%, "body": body, "font": fontName, "fontSZ": fontSize, "fontCol": fontColor}
     }
 
@@ -135,8 +135,6 @@ class Text {
         return [width+1, height]
     }
         
-        
-        
     new_pos(params*) {
         if (params.Length() == 1) {
             this.pos := params[1]
@@ -185,30 +183,6 @@ class Text {
         }
     
         this.show()
-    }
-
-    _text_size(text, fontName, fontSize) {
-        ; Create a DC
-        hdc := DllCall("GetDC", "Ptr", 0, "Ptr")
-        
-        ; Create a font
-        hFont := DllCall("CreateFont", "Int", fontSize, "Int", 0, "Int", 0, "Int", 0, "Int", 400, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "UInt", 0, "Str", fontName)
-        
-        ; Select the font into the DC
-        hOldFont := DllCall("SelectObject", "Ptr", hdc, "Ptr", hFont)
-        
-        ; Calculate the size of the text
-        VarSetCapacity(size, 8)
-        DllCall("GetTextExtentPoint32", "Ptr", hdc, "Str", text, "Int", StrLen(text), "Ptr", &size)
-        width := NumGet(size, 0, "Int")
-        height := NumGet(size, 4, "Int")
-        
-        ; Clean up
-        DllCall("SelectObject", "Ptr", hdc, "Ptr", hOldFont)
-        DllCall("DeleteObject", "Ptr", hFont)
-        DllCall("ReleaseDC", "Ptr", 0, "Ptr", hdc)
-        
-        return [width, height]
     }
 
     show() {
@@ -431,22 +405,45 @@ class Slider {
     run(Config := "") {
         this.min            := NonNull_Ret(Config.min           , this.min)
         this.max            := NonNull_Ret(Config.max           , this.max)
+        ext                 := NonNull_Ret(Config.ext           , -1)
 
-        stepSize := (this.max - this.min) // 100  ; Calculate the step size based on the range and 100 steps
+        DATA := []
+        
+        if ext != -1
+            lostTime := MeasureTime(ext)
+        else {
+            DllCall("QueryPerformanceCounter", "Int64*", ext)
+            lostTime := 0
+        }
+        
+        duration := this.max - this.min - lostTime
+        steps := 100
+
+        stepSize := duration / steps
+        inc := 1
+
+        while 15.6 >= stepSize
+        {
+            stepSize := stepSize * 2
+            inc := inc * 2
+        }
+
+        DATA.push(stepSize)
+        DATA.push(inc)
+
         timerCount := 1
         stepSize := stepSize * 0.94
-    
-        DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
+
         SetTimer, tmpLabel, % stepSize
         Critical, On
-            lSleep(this.max - this.min, beforePropa)
+            lSleep(this.max - this.min, ext)
         Critical, Off
-
         SetTimer, tmpLabel, Off
-        return
+
+        return DATA
         
         tmpLabel:
-            timerCount := timerCount + 1
+            timerCount := timerCount + inc
             GuiControl % this.name ":", % this.hwnd, % timerCount
         return
     }
