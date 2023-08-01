@@ -19,6 +19,17 @@ MouseMove(move_x, move_y)
 {
     ScaledX := move_x * 1920 / gScreen[1]
     ScaledY := move_y * 1080 / gScreen[2]
-    DllCall("mouse_event", "UInt", 0x01, "Int", ScaledX, "Int", ScaledY, "UInt", 0, "Int", 0)
+    DllCall("mouse_event", "UInt", 1, "Int", ScaledX, "Int", ScaledY, "UInt", 0, "Int", 0)
     return
+}
+
+GetKeyboardLanguage()
+{
+	if !ThreadId := DllCall("user32.dll\GetWindowThreadProcessId", "Ptr", WinActive("A"), "UInt", 0, "UInt")
+		return false
+	
+	if !KBLayout := DllCall("user32.dll\GetKeyboardLayout", "UInt", ThreadId, "UInt")
+		return false
+	
+	return KBLayout & 0xFFFF
 }

@@ -26,7 +26,7 @@ SetBatchLines, -1
 SetKeyDelay, -1, -1
 SetMouseDelay, -1, -1
 SetControlDelay, -1
-#MaxHotkeysPerInterval 100000
+#MaxHotkeysPerInterval 99000000
 #MaxThreads 255
 #KeyHistory 0
 ; CoordMode, Mouse, Client

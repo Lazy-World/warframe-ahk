@@ -91,6 +91,7 @@ class Text {
 
     edit_text(control_name, new_text) {
         GuiControl % this.name ":", % this.controls[control_name]["control"], % new_text
+        this.controls[control_name]["body"] := new_text
     }
 
     get_size(control_name) {
@@ -101,7 +102,7 @@ class Text {
     get_control(name) {
         return this.controls[name]
     }
-
+ 
     measure(control_name) {
         textBody := this.controls[control_name]["body"]
         fontName := this.controls[control_name]["font"]
