@@ -91,7 +91,7 @@ TimedKeyLoop(keyName, timeBetweenInputs, endTime, ByRef start := "") {
 F1::
 DllCall("QueryPerformanceCounter", "Int64*", Before)
 
-;insert code here
+SendInput {f}
 
 DllCall("QueryPerformanceCounter", "Int64*", After)
 MsgBox % 1000 * (After - Before) / Frequency

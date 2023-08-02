@@ -33,3 +33,7 @@ GetKeyboardLanguage()
 	
 	return KBLayout & 0xFFFF
 }
+
+TimeStamp(ByRef StampName = 0) {
+    Return DllCall("QueryPerformanceCounter", "Int64*", StampName)                        
+}
