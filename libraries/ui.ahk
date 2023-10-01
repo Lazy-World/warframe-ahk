@@ -84,7 +84,7 @@ class Text {
         fontSize := this.theme[category "SZ"]
         fontColor := this.theme[category "Col"]
 
-        Gui % this.name ": Font", % "s" fontSize " q4", % fontName
+        Gui % this.name ": Font", % "s" fontSize " q5", % fontName
         Gui % this.name ": Add",% "Text", % " " prop " w" this.size.x-this.mbr " BackgroundTrans 0x200 Hwnd"control_name " c" fontColor, % body
         this.controls[control_name] := {"control": %control_name%, "body": body, "font": fontName, "fontSZ": fontSize, "fontCol": fontColor}
     }
@@ -610,16 +610,16 @@ class Window {
         this.outline_len := clamp(this.outline_len, 0, ceil(min(vec_size.x, vec_size.y) * 0.5))
 
         if this.blur
-            this.blur_window := new Line(name "_blur", vec_pos, vec_size, {"color": theme.winBG
+            this.blur_window := new Line(name "_blur", vec_pos, vec_size, {"color": this.bgCol
                 , "alpha": theme.alpBG
                 , "no_bg": no_bg
                 , "blur": this.blur
                 , "border": this.border})
 
         if this.picture != ""
-            this.window := new Picture("pic_" + name, this.picture, vec_pos, vec_size, {"color": theme.winBG, "alpha": theme.alpBG, "x": add_x, "y": add_y})
+            this.window := new Picture("pic_" + name, this.picture, vec_pos, vec_size, {"color": this.bgCol, "alpha": theme.alpBG, "x": add_x, "y": add_y})
         else
-            this.window := new Line(name, vec_pos, vec_size, {"color": theme.winBG, "alpha": theme.alpBG, "no_bg": no_bg})
+            this.window := new Line(name, vec_pos, vec_size, {"color": this.bgCol, "alpha": theme.alpBG, "no_bg": no_bg})
 
         this.text_window := new Text(name, vec_pos, vec_size, theme, {"margin": margin})
 
