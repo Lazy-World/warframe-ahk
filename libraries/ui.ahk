@@ -94,6 +94,11 @@ class Text {
         this.controls[control_name]["body"] := new_text
     }
 
+    edit_color(control_name, new_color) {
+        GuiControl % this.name ": +c" new_color, % this.controls[control_name]["control"]
+        this.controls[control_name]["fontCol"] := new_color
+    }
+
     get_size(control_name) {
         WinGetPos, , , width, height, % "ahk_id " this.controls[control_name]["control"]
         return [width, height]
@@ -662,6 +667,10 @@ class Window {
 
     edit_text(control_name, new_text) {
         this.text_window.edit_text(control_name, new_text)
+    }
+
+    edit_color(control_name, new_color) {
+        this.text_window.edit_color(control_name, new_color)
     }
 
     measure(control_name) {
