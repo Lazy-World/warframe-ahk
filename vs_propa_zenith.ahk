@@ -1,41 +1,62 @@
-#include %A_ScriptDir%
+#include %A_AppData%\LazyHub\libraries
 
-global ui_theme := {}
+global g_uiTheme := {}
 
-ui_theme.insert("winOL", "ADADAD")
-ui_theme.insert("alpOL", 255)
-ui_theme.insert("winBG", "151515")
-ui_theme.insert("alpBG", 180)
+g_uiTheme.insert("winOL", "879CD4")
+g_uiTheme.insert("alpOL", 255)
+g_uiTheme.insert("winBG", "151515")
+g_uiTheme.insert("alpBG", 170)
 
-ui_theme.insert("title", "Montserrat Medium")
-ui_theme.insert("titleCol", "86C8BC")
-ui_theme.insert("titleSZ", 13)
+g_uiTheme.insert("title", "Helvetica")
+g_uiTheme.insert("titleCol", "ff68b5")
+g_uiTheme.insert("titleSZ", 13)
 
-ui_theme.insert("main", "Montserrat Medium")
-ui_theme.insert("mainCol", "White")
-ui_theme.insert("mainSZ", 13)
+g_uiTheme.insert("menu_icon", "menu_font")
+g_uiTheme.insert("menu_iconCol", "f7f2d2")
+g_uiTheme.insert("menu_iconSZ", 15)
 
-ui_theme.insert("info", "Montserrat Medium")
-ui_theme.insert("infoCol", "FFF6BD")
-ui_theme.insert("infoSZ", 13)
+g_uiTheme.insert("main", "Helvetica")
+g_uiTheme.insert("mainCol", "White")
+g_uiTheme.insert("mainSZ", 13)
 
-#include libraries\headers.ahk
-#include libraries\game_settings.ahk
+g_uiTheme.insert("accent", "Helvetica")
+g_uiTheme.insert("accentCol", "FFF6BD")
+g_uiTheme.insert("accentSZ", 13)
 
-#include libraries\custom_ui.ahk
-#include libraries\timers.ahk
-#include libraries\utils.ahk
+g_uiTheme.insert("bullet", "bullet")
+g_uiTheme.insert("bulletCol", "f7f2d2")
+g_uiTheme.insert("bulletSZ", 14)
+
+g_uiTheme.insert("tech", "JetBrains Mono")
+g_uiTheme.insert("techCol", "White")
+g_uiTheme.insert("techSZ", 13)
+
+g_uiTheme.insert("debug", "Small Fonts")
+g_uiTheme.insert("debugCol", "White")
+g_uiTheme.insert("debugSZ", 5)
+
+g_uiTheme.insert("debug_w", "Small Fonts")
+g_uiTheme.insert("debug_wCol", "f2af50")
+g_uiTheme.insert("debug_wSZ", 5)
+
+#include headers.ahk
+#include game_settings.ahk
+
+#include timers.ahk
+#include uix.ahk
+#include utils.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              Settings               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#include %A_ScriptDir%
 #include settings\cfg_%A_Scriptname%
+
+global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
 
 Hotkey, *%MiscReloadMacroKey%, MiscReloadMacro
 Hotkey, *%MiscUnloadMacroKey%, MiscUnloadMacro
 Hotkey, *%MiscPauseMacroKey%, MiscPauseMacro
-
-global g_cooldown := 17186 - g_propaExplodeTime  + g_desiredLimb
 
 ; Technical part
 #IfWinActive ahk_exe Warframe.x64.exe
@@ -44,90 +65,111 @@ Hotkey, IfWinActive, ahk_exe Warframe.x64.exe
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Hotkeys               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Hotkey, *%AntiDesyncKey%, AntiDesync
-Hotkey, *%IncreaseTimeKey%, IncreaseTime
-Hotkey, *%DecreaseTimeKey%, DecreaseTime
-Hotkey, *%EnergyDrainKey%, EnergyDrain
-Hotkey, *%WaterShieldKey%, WaterShield
+hotkeys := {  "AntiDesync": AntiDesyncKey
+            , "EnergyDrain": EnergyDrainKey
+            , "IncreaseTime": IncreaseTimeKey
+            , "DecreaseTime": DecreaseTimeKey
+
+            , "FasterArchwing": FasterArchwingKey
+            , "ConsoleHack": ConsoleHackKey }
+
+for hotkeyFunction, hotkeyCombination in hotkeys {
+    Hotkey, *%hotkeyCombination%, %hotkeyFunction%
+}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;             GUI Settings            ;;
+;;             UI Settings             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global ui := []
+global gPosX := Ceil(gScreen[1] * 0.0066)
+global gPosY := Ceil(gScreen[2] * 0.47)
+global gRowH := 25
 
-gGuiW := 80
-gGuiH := 28
+global header_pos       := new Vector(gPosX, gPosY)
+global header_size      := new Vector(120, 22)
 
-gPosX := Ceil(gScreen[1] * 0.008)
-gPosY := Ceil(gScreen[2] * 0.47)
+global body_pos         := header_pos.add(0, header_size.y + 4)
+global body_size        := new Vector(header_size.x, gRowH)
+
+global ind_pos          := new Vector(gPosX, gScreen[2] - 260 - 8 - gRowH*3)
+global ind_size         := new Vector(body_size.x, gRowH)
+
+global warnUi_pos       := new Vector(gScreenCenter[1], gScreen[2] * 0.53)
+global warnUi_size      := new Vector(30, 25)
+global warnIcon_size    := new Vector(20, 19)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                 GUI                 ;;
+;;                  UI                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-ui.push(new Window("vs_title", gPosX, gPosY, gGuiW, gGuiH, ui_theme, 3.132))
-ui.push(new Window("vs_body", gPosX, gPosY+ui[1].h+4, gGuiW, gGuiH*2, ui_theme, 3.132))
+ui          := new Ui(g_uiTheme)
+ui_ind      := new Ui(g_uiTheme)
+ui_warn     := new Ui(g_uiTheme)
 
-ui[1].new_text("T1", "lazy", "auto", "title")
-ui[2].new_text("T2", g_cooldown, "xs ym+3", "main")
-ui[2].new_text("T3", "[time]", "xs ym+24", "info")
+header      := ui.new_window("header", header_pos, header_size, {"margin": 2, "blur": 1, "border": 0, "ol": [0, 1, 0, 0]})
+body        := ui.new_window("body", body_pos, body_size, {"blur": 1, "border": 0, "ol": [0, 0, 0, 1]})
+ind         := ui_ind.new_window("ind", ind_pos, ind_size, {"blur": 1, "border": 1, "ol": "corner"})
+warnUi      := ui_warn.new_window("lang_warn", warnUi_pos, warnUi_size, {"blur": 1, "alpha": 115})
 
-loop % ui.Length()
-    ui[A_Index].show()
+pic_warn    := new Picture("pic_warn", "warn.png", warnUi_pos.add(5, 3), warnIcon_size, {"alpha": 255})
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               UI Text               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+header.new_text("T1", "D", "menu_icon", "auto")
+
+body.new_text("T2_1", "Limb", "main", "left ys xs xm+10")
+body.new_text("T2_2", Format("{1:.3f}", g_desiredLimb * 0.001), "accent", "xs ys xp+15")
+body.new_text("T2_3", "", "bullet", "xs ys xm ym+22")
+
+ind.new_slider("S1", new Vector(31, 5), new Vector(body_size.x - 40, 7), 0, g_TerrySpawn, 0)
+ind.new_text("T3_1", "AD", "tech", "left ys xs xm+5") ; WS - Water Shield
+ind.new_text("T3_2", "NEXT: ", "debug", "left ys xs xm+30 ym+11")
+ind.new_text("T3_3", "TERRY", "debug_w", "left ys xs xm+59 ym+11")
+
+warnUi.new_text("T4", "", "main", "left ys xs ym+0 xm+" . warnIcon_size.x+11, {"fit_x": 1})
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;               UI Misc               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+global body_S1 := ind.slider("S1")
+
+SetTimer, WarnCheck, 979
+
+ui.show()
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                Funcs                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-UpdateTimer(begin, end := "") {
-    if (end == "")
-        DllCall("QueryPerformanceCounter", "Int64*", end)
-
-    offset := MeasureTime(begin, end)
-    offsetText := Format(offset >= 9999 ? "{1:.0f}" : "{1:.1f}", offset)
-
-    ui[1].edit_text("T1", offsetText)
-}
-
 AntiDesync:
-    GoSub, IncreaseTime
-    GoSub, DecreaseTime
+    oldBodySize := body_size.y
+    newBodySize := body_size.y + gRowH
 
-    loop, 5
+    body.new_size(body_size.x, newBodySize)
+    body.edit_text("T2_3", "AAAAA")
+
+    ui_ind.show()
+    GoSub, AntiDesyncLoop
+    ui_ind.hide()
+
+    body.new_size(body_size.x, oldBodySize)
+    body.edit_text("T2_3", "AAAAA")
+return 
+
+EnergyDrain:
+    SendInput {Blind}{%secondAKey%}
+    SendInput {Blind}{%shiftKey% Down}
+    lSleep(10)
+    
+    Loop, 18
     {
-        DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
-        SendInput, {Blind}{%shoot2Key%}
-        DllCall("QueryPerformanceCounter", "Int64*", afterPropa)
-
-        GoSub, BackToWarframe
-        lSleep(700)
-        SendInput, {Blind}{%switchKey%}
-        
-        lSleep(g_propaExplodeTime , beforePropa)
-
-        DllCall("QueryPerformanceCounter", "Int64*", beforeRaplak)
-        SendInput, {Blind}{%shootKey%}
-
-        Sleep 100
-        SendInput, {Blind}{%switchKey%}
-        Sleep 4000
-
-        if A_Index = 5
-            return
-
-        UpdateTimer(beforePropa, beforeRaplak)
-        lSleep(14700, beforeRaplak)
-        
-        Hotkey, *%IncreaseTimeKey%, off
-        Hotkey, *%DecreaseTimeKey%, off
-
-        lSleep(15300, beforeRaplak)
-
-        Hotkey, *%IncreaseTimeKey%, on
-        Hotkey, *%DecreaseTimeKey%, on
-
-        lSleep(g_cooldown, beforeRaplak)
-        UpdateTimer(beforeRaplak)
+        SendInput {Blind}{%jumpKey%}
+        SendInput {Blind}{%shootKey%}
+        lSleep(12)
     }
+    SendInput {Blind}{%shiftKey% Up}
+
+    if (g_energyPadTablet)
+        SendInput {Blind}{%energyPadKey%} 
 return
 
 IncreaseTime:
@@ -137,9 +179,8 @@ IncreaseTime:
     g_desiredLimb += g_step
     g_cooldown += g_step
 
-    limbText := Format("{1:.3f}", g_desiredLimb * 0.001)
-    ui[2].edit_text("T2", g_cooldown)
-    ui[2].edit_text("T3", limbText)
+    limbText := Format("{1:.0f}", g_desiredLimb)
+    body.edit_text("T2_2", limbText)
 return
 
 DecreaseTime:
@@ -149,101 +190,153 @@ DecreaseTime:
     g_desiredLimb -= g_step
     g_cooldown -= g_step
 
-    limbText := Format("{1:.3f}", g_desiredLimb * 0.001)
-    ui[2].edit_text("T2", g_cooldown)
-    ui[2].edit_text("T3", limbText)
+    limbText := Format("{1:.0f}", g_desiredLimb)
+    body.edit_text("T2_2", limbText)
 return
 
-EnergyDrain:
-    SendInput, {Blind}{%sprintKey% Down}
-    lSleep(10)
-    
-    Loop, 18
+FasterArchwing:
+    Critical
+    BlockInput On
+
+    if (g_fasterArchwingTablet)
     {
-        SendInput, {Blind}{%jumpKey%}
-        SendInput, {Blind}{%shootKey%}
-        lSleep(12)
+        SendInput {Blind}{%energyPadKey%}
+        lSleep(minSleepTime)
     }
-    SendInput, {Blind}{%sprintKey% Up}
+
+    SendInput {Blind}{%secondAKey%} ; 2nd volt skill
+    lSleep(minSleepTime)
+    SendInput {Blind}{%archwingKey%}
+
+    BlockInput Off
+    Critical Off
+
+    lSleep(1500) ; Archwing recharge time
 return
 
-BackToWarframe:
-    SendInput, {Blind}{%secondAKey%}
-    Sleep, 300
-    SendInput, {Blind}{%operatorKey%}
+ConsoleHack:
+    BlockInput On
+
+    SendInput {Blind}{%aimKey% Down}
+    lSleep(25)
+        TimeStamp(blink)
+        SendInput {Blind}{%shiftKey%}
+    lSleep(minSleepTime)
+
+    lSleep(100) ; blink time
+    SendInput {Blind}{%aimKey% Up}
+
+    loop, 3
+    {
+        SendInput {Blind}{%useKey%}
+        lSleep(30)
+        SendInput {Blind}{%hackKey%}
+        lSleep(50)
+    }
+
+    lSleep(1500, blink)
+    BlockInput Off
 return
 
-WaterShield:
-    startX  := 0
-    startY  := gScreen[2] * 0.45
-    endX    := gScreen[1] * 0.35
-    endY    := gScreen[2] - startY - 20
-
-    loop
+AntiDesyncLoop:
+    loop % 5
     {
-        PixelSearch,,, startX, startY, endX, endY, 0xB51715, 15, Fast RGB ; 0xAD3932
+        TimeStamp(beforePropa)
+        SendInput {Blind}{%shoot2Key%}
+
+        lSleep(5)
+        SendInput {Blind}{%secondAKey%}
+
+        ind.edit_text("T3_3", "OPERATOR")
+        body_S1.run({"min": 0, "max": 300, "ext": beforePropa})
+        SendInput {Blind}{%operatorKey%}
+
+        ind.edit_text("T3_3", "SWITCH")
+        body_S1.run({"max": 700})
+        SendInput {Blind}{%switchKey%}
+        
+        ind.edit_text("T3_3", "LIMB " . A_Index+1)
+        body_S1.run({"max": g_propaExplodeTime, "ext": beforePropa})
+        body_S1.set(g_propaExplodeTime)
+        
+        TimeStamp(limb)
+        SendInput {Blind}{%shootKey%}
+
+        body.edit_text("T2_3", StrRepeat("A", 5 - A_Index))
+        
+        if A_Index = 5
+            break
+
+        Sleep 150
+        SendInput {Blind}{%switchKey%}
+
+        ind.edit_text("T3_3", "DRAIN")
+        body_S1.run({"max": 12500})
+        body_S1.set(12500)
+
+        GoSub, EnergyDrain
+
+        ind.edit_text("T3_3", "PROPA")
+        body_S1.run({"max": g_cooldown, "ext": limb})
+        body_S1.set(g_cooldown)
     }
-    until (ErrorLevel == 0)
-    
-    BlockInput, ON
-    DllCall("QueryPerformanceCounter", "Int64*", afterShardDetection)
-    
-    GoSub, Shard
-    SetTimer, Shard, 10
-
-    lSleep(g_eidolonSpawnDelay)
-
-    ; MID portal part
-    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
-    SendInput, {Blind}{%shoot2Key%}
-    MouseMove(mouseMove1[1], mouseMove1[2])
-    lSleep(525, beforePropa)
-
-    ; CL portal part
-    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
-    SendInput, {Blind}{%shoot2Key%}
-    MouseMove(mouseMove2[1], mouseMove2[2])
-    lSleep(525, beforePropa)
-
-    ; CR portal part
-    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
-    SendInput, {Blind}{%shoot2Key%}
-    MouseMove(mouseMove3[1], mouseMove3[2])
-    lSleep(300, beforePropa)
-
-    ; UNSTUCK part
-    SetTimer, Shard, Off
-    SendInput, {Blind}{%chatKey%}
-    lSleep(15)
-    SendInput, {Text}/unstuck
-    lSleep(15)
-    SendInput, {Enter}
-
-    ; LONG propa to med-tower
-    lSleep(520, beforePropa)
-    DllCall("QueryPerformanceCounter", "Int64*", beforePropa)
-    SendInput, {Blind}{%shoot2Key%}
-    SendInput, {Blind}{%meleeKey%}
-
-    ; LONG zenith limb
-    MouseMove(mouseMove4[1], mouseMove4[2])
-    lSleep(20, beforePropa)
-    SendInput, {Blind}{%emoteKey%}
-    lSleep(70, beforePropa)
-
-    Loop, 130
-    {
-        SendInput, {Blind}{%shootKey%}
-        lSleep(10)
-    }
-    BlockInput, OFF
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Timers                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Shard:
-    SendInput, {Blind}{%useKey%}
+WarnCheck:
+    if (not g_enableWarnings)
+        return
+    
+    scriptStabilityState := []
+    
+    warnUi_size.x := 30
+    warnUi_pos.x := gScreenCenter[1]
+
+    str := ""
+    sep := ", "
+
+    if !LangID := GetKeyboardLanguage()
+    {
+        scriptStabilityState.push("IRAQ")
+    } else {
+        if (LangID != 0x0409) ; if not english
+            scriptStabilityState.push("EN")
+    }
+
+    if GetKeyState("CapsLock","T")
+        scriptStabilityState.push("CAPS")
+
+    if scriptStabilityState.length() = 0
+    {
+        ui_warn.hide()
+        pic_warn.hide()
+        oldStr := ""
+        return
+    }
+
+    for index, param in scriptStabilityState
+        str .= sep . param
+    str := SubStr(str, StrLen(sep)+1)
+
+    if (str == oldStr)
+        return
+
+    warnUi.edit_text("T4", str)
+    oldStr := str
+    
+    curWidth := warnUi_size.x + warnUi.text().measure("T4")[1] + 10
+    newX := warnUi_pos.x - curWidth // 2
+
+    warnUi.new_pos(newX, warnUi_pos.y)
+    pic_warn.pos.x := newX + 5
+    oldX := warnUi_pos.x
+
+    warnUi.new_size(curWidth, warnUi_size.y)
+    oldWidth := warnUi_size.x
+
+    pic_warn.show()
 return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -261,6 +354,10 @@ return
 
 MiscPauseMacro:
     suspend, toggle
-    state := A_IsSuspended ? "pause" : "lazy"
-    ui[1].edit_text("T1", state)
+
+    if A_IsSuspended
+        mainText := header.text().get_control("T1")["body"]
+
+    state := A_IsSuspended ? "suspended" : mainText
+    header.edit_text("T1", state)
 return

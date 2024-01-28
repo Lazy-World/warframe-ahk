@@ -52,7 +52,8 @@ class Text {
         this.size := vec_size
         this.theme := theme
 
-        this.mtl := NonNull_Ret(Config.margin, 2) ; margin top left
+        this.mtl            := NonNull_Ret(Config.margin        , 2) ; margin from top left
+
         this.mbr := this.mtl + this.mtl ; margin bottom right
 
         Gui % this.name ": +AlwaysOnTop -Caption +LastFound -SysMenu +ToolWindow -DPIScale +E0x20 +Hwnd"myHwnd
@@ -61,7 +62,10 @@ class Text {
         Winset, Transcolor, 0x000000  
     }
 
-    new_text(control_name, body, category, prop := "") {
+    new_text(control_name, body, category, prop := "", Config := "") {
+        fit_x               := NonNull_Ret(Config.fit_x         , 0)
+        fit_y               := NonNull_Ret(Config.fit_y         , 0)
+
         StringLower, category, category
         StringLower, prop, prop
 
@@ -86,7 +90,7 @@ class Text {
 
         Gui % this.name ": Font", % "s" fontSize " q5", % fontName
         Gui % this.name ": Add",% "Text", % " " prop " w" this.size.x-this.mbr " BackgroundTrans 0x200 Hwnd"control_name " c" fontColor, % body
-        this.controls[control_name] := {"control": %control_name%, "body": body, "font": fontName, "fontSZ": fontSize, "fontCol": fontColor}
+        this.controls[control_name] := {"control": %control_name%, "body": body, "font": fontName, "fontSZ": fontSize, "fontCol": fontColor, "fit_x": fit_x, "fit_y": fit_y}
     }
 
     edit_text(control_name, new_text) {
@@ -161,7 +165,7 @@ class Text {
 
         this.show()
     }
-
+    
     new_size(params*) {
         if (params.Length() == 1) {
             this.size := params[1]
@@ -169,9 +173,19 @@ class Text {
             this.size.x := params[1]
             this.size.y := params[2]
         }
-    
+
         for name in this.controls
-            GuiControl % this.name ": Move", % this.controls[name]["control"], % "w" this.size.x-this.mbr " h" this.size.y-this.mbr
+        {
+            fitList := ""
+
+            if (this.controls[name]["fit_x"] != 0)
+                fitList .= " w" this.size.x-this.mbr
+    
+            if (this.controls[name]["fit_y"] != 0)
+                fitList .= " h" this.size.y-this.mbr
+
+            GuiControl % this.name ": Move", % this.controls[name]["control"], % fitList
+        }
     
         this.show()
     }
@@ -185,8 +199,16 @@ class Text {
     
         for name in this.controls
         {
-            GuiControl % this.name ": Move", % this.controls[name]["control"], % "w" this.size.x-this.mbr " h" this.size.y-this.mbr
-        }
+            fitList := ""
+
+            if (this.controls[name]["fit_x"] != 0)
+                fitList .= " w" this.size.x-this.mbr
+    
+            if (this.controls[name]["fit_y"] != 0)
+                fitList .= " h" this.size.y-this.mbr
+
+            GuiControl % this.name ": Move", % this.controls[name]["control"], % fitList
+        }    
     
         this.show()
     }
@@ -641,8 +663,8 @@ class Window {
         this.sliders[this.name . "_" . name] := new Slider(this.name . "_" . name, this.pos.add(vec_pos), vec_size, min, max, cur, Config)
     }
 
-    new_text(control_name, body, category, prop := "") {
-        this.text_window.new_text(control_name, body, category, prop)
+    new_text(control_name, body, category, prop := "", Config := "") {
+        this.text_window.new_text(control_name, body, category, prop, Config)
     }
 
     slider(name) {

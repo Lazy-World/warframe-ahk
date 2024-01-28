@@ -1,24 +1,19 @@
 ; @Title Script Settings
 
 ; @Value
-g_desiredLimb := -20 ; Limb time (ms)
+g_desiredLimb := 10 ; Limb time (ms)
 
 ; @Value
-g_propaExplodeTime := 1610 ; Propa explode time (ms)
+g_propaExplodeTime := 1614 ; Propa explode time (ms)
 
 ; @Value
 g_step := 5 ; Inc/Dec limb time (ms)
 
-; @Value
-g_eidolonSpawnDelay := 200 ; Eidolon spawn delay (ms)
-
-; @Value
-g_msBeforePropaExplode := 150 ; Anti-knockdown (ms)
-
-; @Title Keybinds
+; @Title VS Part
 
 ; @Bind
-AntiDesyncKey = XButton2 ; Enable anti-desync
+; @Tooltip Hold SECONDARY weapon then go to OPERATOR before start
+AntiDesyncKey = F3 ; Enable anti-desync
 
 ; @Bind
 IncreaseTimeKey = Down ; Increase limb time
@@ -29,8 +24,22 @@ DecreaseTimeKey = Left ; Decrease limb time
 ; @Bind
 EnergyDrainKey = F5 ; Energy drain
 
+; @Boolean
+g_energyPadTablet := False ; Energy pad after drain
+
+; @Title General
+
+; @Boolean
+g_enableWarnings := True ; Enable warnings
+
+; @Boolean
+g_fasterArchwingTablet := False ; Energy pad before archwing
+
 ; @Bind
-WaterShieldKey = Numpad0 ; Watershield
+FasterArchwingKey = c ; speed + archwing (volt)
+
+; @Bind
+ConsoleHackKey = XButton2 ; Blink + lure hack
 
 ; @Title Misc
 
@@ -43,16 +52,3 @@ MiscUnloadMacroKey = Del ; Unload macros
 ; @Bind
 MiscPauseMacroKey = F11 ; Pause / Unpause
 
-; @Title Mouse move section
-
-; @MouseMove
-mouseMove1 := [-408 , 204] ; MID -> CL portal
-
-; @MouseMove
-mouseMove2 := [929, 42] ; CL -> CR portal
-
-; @MouseMove
-mouseMove3 := [-1087 , -9] ; CR -> Med-Tower
-
-; @MouseMove
-mouseMove4 := [-887 , 490] ; Med-Tower -> Eidolon Limb
