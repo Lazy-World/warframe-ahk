@@ -5,41 +5,21 @@
 </p>
 
 # 📝Contents
-- [Libraries](#-libraries)
-  - [Installation](#installation)
-  - [Game settings library](#game-settings-library)
 - [Fonts](#%EF%B8%8F-fonts)
   - [Download links](#download-links) 
   - [Font setup](#font-setup)
   - [Step by Step instruction](#%EF%B8%8F-step-by-step-instruction)
   - [Preview](#preview)
-  
-## 📦 Libraries
-
-### Installation
-
-- Copy library files to **[ %AppData%/LazyHub/lib ]** path (this is a **default** lib path that I use in all scripts)
-
-### Game settings library
-
-- Open **Warframe** then open InGame settings (**ESC -> Options -> KEYBOARD/MOUSE -> Customize Key Binds**)
-- Open **game_settings.ahk** by any code editor
-- All KeyBinds are separeted by groups. If you see `; Description` near KeyBind it means than you can find it in game settings with the same name
-  - **[Control keys]** section contains main keybinds
-  - **[Abilities]** section is responsible for **Abilities**
-  - **[WASD Keys]** section is responsible for (yes, **WASD** keys)
-  - **[Gear Hotkeys]** section is responsible for binds in **Gear**
-  - **[RTSS binds for FPS]** section is responsible for `FPS cap`
-
-[Back to TOC](#contents)
-
----
+- [Libraries](#-libraries)
+  - [Installation](#installation)
+  - [Game settings library](#game-settings-library)
   
 ## 🖊️ Fonts
 
 ### Download links
-- [JetBrainsMono](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/JetBrainsMono-Medium.ttf): "**JetBrains Mono Medium**" in *.ahk file
-- [Montserrat](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/Montserrat-Medium.otf): "**Montserrat Medium**" in *.ahk file
+- [All Fonts](./attachments): All fonts I use in my scripts
+- [JetBrainsMono](./attachments/Fonts/JetBrainsMono-Medium.ttf): "**JetBrains Mono Medium**" in *.ahk file
+- [Montserrat](./attachments/Fonts/Montserrat-Medium.otf): "**Montserrat Medium**" in *.ahk file
 
 ### Font setup
 
@@ -70,6 +50,27 @@
 - **Montserrat** Font preview of **UI** in **vs_propa_raplak.ahk**
 
   ![Montserrat preview](./attachments/Images/Montserrat-Medium-Preview.png)
+
+[Back to TOC](#contents)
+
+---
+
+## 📦 Libraries
+
+### Installation
+
+- Copy library files to **[ %AppData%/LazyHub/lib ]** path (this is a **default** lib path that I use in all scripts)
+
+### Game settings library
+
+- Open **Warframe** then open InGame settings (**ESC -> Options -> KEYBOARD/MOUSE -> Customize Key Binds**)
+- Open **game_settings.ahk** by any code editor
+- All KeyBinds are separeted by groups. If you see `; Description` near KeyBind it means than you can find it in game settings with the same name
+  - **[Control keys]** section contains main keybinds
+  - **[Abilities]** section is responsible for **Abilities**
+  - **[WASD Keys]** section is responsible for (yes, **WASD** keys)
+  - **[Gear Hotkeys]** section is responsible for binds in **Gear**
+  - **[RTSS binds for FPS]** section is responsible for `FPS cap`
 
 [Back to TOC](#contents)
 
