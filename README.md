@@ -4,18 +4,16 @@
   <p align="center">AHK is a versatile tool that can be used for a wide range of automation tasks :)</p>
 </p>
 
+## [🔗 Download LazyHub](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)
+> Version: 3.0.8
+---
+
 # 📝Contents
 - [Fonts](#%EF%B8%8F-fonts)
   - [Download links](#download-links)
 - [Preview](#-preview)
 - [Pictures](#%EF%B8%8F-pictures)
-  - [Usage](#usage)
-
----
-## [🔗 Download LazyHub](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)
-> Version: 3.0.8
----
- 
+  - [Usage](#usage) 
 
 ## 🖊️ Fonts
 
