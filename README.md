@@ -4,25 +4,21 @@
   <p align="center">AHK is a versatile tool that can be used for a wide range of automation tasks :)</p>
 </p>
 
+## [🔗 Download LazyHub](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)
+> Version: 3.0.8
+---
+
 # 📝Contents
 - [Fonts](#%EF%B8%8F-fonts)
   - [Download links](#download-links)
 - [Preview](#-preview)
 - [Pictures](#%EF%B8%8F-pictures)
-  - [Usage](#usage)
-
----
-## [🔗 Download LazyHub](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)
-> Version: 3.0.8
----
- 
+  - [Usage](#usage) 
 
 ## 🖊️ Fonts
 
 ### Download links
-- [All Fonts](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip): All fonts I use in my scripts
-- [JetBrainsMono](./attachments/Fonts/JetBrainsMono-Medium.ttf): "**JetBrains Mono Medium**" in *.ahk file
-- [Montserrat](./attachments/Fonts/Montserrat-Medium.otf): "**Montserrat Medium**" in *.ahk file
+- [All Fonts](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip): **All fonts I use in my scripts**
 
 [Back to TOC](#contents)
 
