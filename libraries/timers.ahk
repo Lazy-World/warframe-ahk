@@ -5,6 +5,9 @@ DllCall("QueryPerformanceFrequency", "Int64*", Frequency)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Lumi                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+TimeStamp(ByRef StampName = 0) {
+    Return DllCall("QueryPerformanceCounter", "Int64*", StampName)                        
+}
 
 lSleep(s_time, ByRef start = "") {
     Critical
