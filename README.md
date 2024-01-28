@@ -41,15 +41,23 @@
   ```
 - Run or reload script file.
 
-### Preview
+### Preview for `vs_propa_raplak.ahk` && `vs_propa_zenith.ahk`
 
-- **JetBrainsMono** Font preview of **UI** in **vs_propa_raplak.ahk**
+- **Main UI** 
 
-  ![JetBrainsMono preview](./attachments/Images/JetBrainsMono-Preview.png)
+  ![ui preview](./attachments/Images/ui.png)
 
-- **Montserrat** Font preview of **UI** in **vs_propa_raplak.ahk**
+- **Anti-desync enabled** (bullet count == remaining shots)
 
-  ![Montserrat preview](./attachments/Images/Montserrat-Medium-Preview.png)
+  ![ui_antidesync preview](./attachments/Images/ui_antidesync.png)
+
+- **State indicator** 
+
+  ![ui_indicator preview](./attachments/Images/ui_indicator.gif)
+
+- **Warnings** 
+
+  ![warnings preview](./attachments/Images/warnings.png)
 
 [Back to TOC](#contents)
 
