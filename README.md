@@ -5,15 +5,54 @@
 </p>
 
 # 📝Contents
+- [Fonts](#%EF%B8%8F-fonts)
+  - [Download links](#download-links)
+- [Preview](#-preview)
 - [Pictures](#%EF%B8%8F-pictures)
   - [Usage](#usage)
-- [Fonts](#%EF%B8%8F-fonts)
-  - [Download links](#download-links) 
-  - [Preview](#preview-for-vs_propa_raplakahk--vs_propa_zenithahk)
 - [Libraries](#-libraries)
   - [Installation](#installation)
   - [Game settings library](#game-settings-library)
+
+---
+## [🔗 Download LazyHub](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)
+> Version: 3.0.8
+---
  
+
+## 🖊️ Fonts
+
+### Download links
+- [All Fonts](./attachments): All fonts I use in my scripts
+- [JetBrainsMono](./attachments/Fonts/JetBrainsMono-Medium.ttf): "**JetBrains Mono Medium**" in *.ahk file
+- [Montserrat](./attachments/Fonts/Montserrat-Medium.otf): "**Montserrat Medium**" in *.ahk file
+
+[Back to TOC](#contents)
+
+---
+
+# 🔮 Preview
+> `vs_propa_raplak.ahk` & `vs_propa_zenith.ahk`
+- **Main UI** 
+
+  ![ui preview](./attachments/Images/ui.png)
+
+- **Anti-desync enabled** (bullet count == remaining shots)
+
+  ![ui_antidesync preview](./attachments/Images/ui_antidesync.png)
+
+- **State indicator** 
+
+  ![ui_indicator preview](./attachments/Images/ui_indicator.gif)
+
+- **Warnings** (EN == not english)
+
+  ![warnings preview](./attachments/Images/warnings.png)
+
+[Back to TOC](#contents)
+
+---
+
 ## 🖼️ Pictures
 
 ### Usage
@@ -38,35 +77,6 @@
 
 ---
 
-## 🖊️ Fonts
-
-### Download links
-- [All Fonts](./attachments): All fonts I use in my scripts
-- [JetBrainsMono](./attachments/Fonts/JetBrainsMono-Medium.ttf): "**JetBrains Mono Medium**" in *.ahk file
-- [Montserrat](./attachments/Fonts/Montserrat-Medium.otf): "**Montserrat Medium**" in *.ahk file
-
-### Preview for `vs_propa_raplak.ahk` && `vs_propa_zenith.ahk`
-
-- **Main UI** 
-
-  ![ui preview](./attachments/Images/ui.png)
-
-- **Anti-desync enabled** (bullet count == remaining shots)
-
-  ![ui_antidesync preview](./attachments/Images/ui_antidesync.png)
-
-- **State indicator** 
-
-  ![ui_indicator preview](./attachments/Images/ui_indicator.gif)
-
-- **Warnings** (EN == not english)
-
-  ![warnings preview](./attachments/Images/warnings.png)
-
-[Back to TOC](#contents)
-
----
-
 ## 📦 Libraries
 
 ### Installation
@@ -86,4 +96,3 @@
 
 [Back to TOC](#contents)
 
----
