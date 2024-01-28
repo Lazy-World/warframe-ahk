@@ -16,7 +16,7 @@
   - [Usage](#usage) 
 
 ## 🖊️ Fonts
-### - [All Fonts](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip): **All fonts I use in my scripts**
+### - [Downdoad](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip): **All fonts I use in my scripts**
 
 ---
 
