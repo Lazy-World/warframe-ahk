@@ -35,7 +35,7 @@
 
 - **Warnings** (EN == not english)
 
-  ![warnings preview](./attachments/Images/warnings.png)
+  ![warnings preview](./attachments/Images/warnings.gif)
 
 [Back to TOC](#contents)
 
