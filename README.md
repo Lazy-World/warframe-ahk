@@ -20,9 +20,7 @@
 ## 🖊️ Fonts
 
 ### Download links
-- [All Fonts](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip): All fonts I use in my scripts
-- [JetBrainsMono](./attachments/Fonts/JetBrainsMono-Medium.ttf): "**JetBrains Mono Medium**" in *.ahk file
-- [Montserrat](./attachments/Fonts/Montserrat-Medium.otf): "**Montserrat Medium**" in *.ahk file
+- [All Fonts](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip): **All fonts I use in my scripts**
 
 [Back to TOC](#contents)
 
