@@ -5,13 +5,39 @@
 </p>
 
 # 📝Contents
+- [Pictures](#%EF%B8%8F-pictures)
+  - [Usage](#usage)
 - [Fonts](#%EF%B8%8F-fonts)
   - [Download links](#download-links) 
-  - [Preview](#preview)
+  - [Preview](#preview-for-vs_propa_raplakahk--vs_propa_zenithahk)
 - [Libraries](#-libraries)
   - [Installation](#installation)
   - [Game settings library](#game-settings-library)
+ 
+## 🖼️ Pictures
+
+### Usage
+- Go to `%appdata%\LazyHub` and create `pictures` folder
+
+  ![pictures preview](./attachments/Images/pictures.png)
+
+- Create your script
+  ```ahk
+  ; Setup sizes
+  global picture_pos          := new Vector(x_position, y_position)
+  global picture_size         := new Vector(width, height)
   
+  ; Create picture
+  ; 2D_2.png should be located in pictures path !!
+  pic_1                       := new Picture("pic_1", "2D_2.png", picture_pos, picture_size)
+  
+  ; Render your picture
+  pic_1.show()
+  ```
+[Back to TOC](#contents)
+
+---
+
 ## 🖊️ Fonts
 
 ### Download links
