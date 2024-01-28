@@ -10,9 +10,6 @@
 - [Preview](#-preview)
 - [Pictures](#%EF%B8%8F-pictures)
   - [Usage](#usage)
-- [Libraries](#-libraries)
-  - [Installation](#installation)
-  - [Game settings library](#game-settings-library)
 
 ---
 ## [🔗 Download LazyHub](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)
@@ -74,25 +71,3 @@
   pic_1.show()
   ```
 [Back to TOC](#contents)
-
----
-
-## 📦 Libraries
-
-### Installation
-
-- Copy library files to **[ %AppData%/LazyHub/lib ]** path (this is a **default** lib path that I use in all scripts)
-
-### Game settings library
-
-- Open **Warframe** then open InGame settings (**ESC -> Options -> KEYBOARD/MOUSE -> Customize Key Binds**)
-- Open **game_settings.ahk** by any code editor
-- All KeyBinds are separeted by groups. If you see `; Description` near KeyBind it means than you can find it in game settings with the same name
-  - **[Control keys]** section contains main keybinds
-  - **[Abilities]** section is responsible for **Abilities**
-  - **[WASD Keys]** section is responsible for (yes, **WASD** keys)
-  - **[Gear Hotkeys]** section is responsible for binds in **Gear**
-  - **[RTSS binds for FPS]** section is responsible for `FPS cap`
-
-[Back to TOC](#contents)
-
