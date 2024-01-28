@@ -12,7 +12,6 @@ g_step := 5 ; Inc/Dec limb time (ms)
 ; @Title VS Part
 
 ; @Bind
-; @Tooltip Hold SECONDARY weapon then go to OPERATOR before start
 AntiDesyncKey = F3 ; Enable anti-desync
 
 ; @Bind
