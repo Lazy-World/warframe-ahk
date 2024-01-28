@@ -43,7 +43,7 @@ g_uiTheme.insert("debug_wSZ", 5)
 #include game_settings.ahk
 
 #include timers.ahk
-#include uix.ahk
+#include ui.ahk
 #include utils.ahk
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -152,7 +152,6 @@ AntiDesync:
     ui_ind.hide()
 
     body.new_size(body_size.x, oldBodySize)
-    body.edit_text("T2_3", "AAAAA")
 return 
 
 EnergyDrain:
