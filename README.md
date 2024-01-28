@@ -7,8 +7,6 @@
 # 📝Contents
 - [Fonts](#%EF%B8%8F-fonts)
   - [Download links](#download-links) 
-  - [Font setup](#font-setup)
-  - [Step by Step instruction](#%EF%B8%8F-step-by-step-instruction)
   - [Preview](#preview)
 - [Libraries](#-libraries)
   - [Installation](#installation)
@@ -20,26 +18,6 @@
 - [All Fonts](./attachments): All fonts I use in my scripts
 - [JetBrainsMono](./attachments/Fonts/JetBrainsMono-Medium.ttf): "**JetBrains Mono Medium**" in *.ahk file
 - [Montserrat](./attachments/Fonts/Montserrat-Medium.otf): "**Montserrat Medium**" in *.ahk file
-
-### Font setup
-
-1. Download and install any font you want
-1. Open [**.ttf** or **.otf**] and copy **"Font name:"**
-1. Open script file and edit **["title", "main", "info"]**
-
-### ⚙️ Step by Step instruction
-
-- [Download font](#download-links) then find "Font name" field and copy font's name
-
-  ![get_fontname preview](./attachments/Images/get_fontname.png)
-
-- Open script and select Font names for each category. In my case I use **Montserrat Medium** for each category
-  ```ahk
-  ui_theme.insert("title", "Montserrat Medium")
-  ui_theme.insert("main",  "Montserrat Medium")
-  ui_theme.insert("info",  "Montserrat Medium")
-  ```
-- Run or reload script file.
 
 ### Preview for `vs_propa_raplak.ahk` && `vs_propa_zenith.ahk`
 
@@ -55,7 +33,7 @@
 
   ![ui_indicator preview](./attachments/Images/ui_indicator.gif)
 
-- **Warnings** 
+- **Warnings** (EN == not english)
 
   ![warnings preview](./attachments/Images/warnings.png)
 
