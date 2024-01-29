@@ -4,21 +4,18 @@
   <p align="center">AHK is a versatile tool that can be used for a wide range of automation tasks :)</p>
 </p>
 
-## [🔗 Download LazyHub](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)
-> Version: 3.0.8
+# 🔗 Download Links
+#### - [[download](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip)] All fonts I use in my scripts
+#### - [[download](https://github.com/Lazy-World/warframe-ahk/blob/LazyHub/LazyHub/LazyHubSetup.exe)] Script manager aka `LazyHub`
+#### - [[download](./attachments/pictures)] All nesessary images
+
 ---
 
 # 📝Contents
-- [Fonts](#%EF%B8%8F-fonts)
-  - [Download links](#download-links)
 - [Preview](#-preview)
 - [Pictures](#%EF%B8%8F-pictures)
-  - [Usage](#usage) 
-
-## 🖊️ Fonts
-### - [Downdoad](https://github.com/Lazy-World/warframe-ahk/raw/main/attachments/Fonts/fonts.zip): **All fonts I use in my scripts**
-
----
+  - [Usage](#usage)
+- [FAQ](#frequently-asked-questions)
 
 # 🔮 Preview
 > `vs_propa_raplak.ahk` & `vs_propa_zenith.ahk`
@@ -63,3 +60,12 @@
   pic_1.show()
   ```
 [Back to TOC](#contents)
+
+---
+
+## Frequently Asked Questions
+
+### Q: Why I need fonts?
+A: Fonts are needed for preventing situations like this
+  ![why_fonts](/attachments/Images/why_fonts.png)
+
