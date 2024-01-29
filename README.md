@@ -16,6 +16,7 @@
 - [Pictures](#%EF%B8%8F-pictures)
   - [Usage](#usage)
 - [FAQ](#frequently-asked-questions)
+  - [Why fonts are needed](#q-why-fonts-are-needed)  
 
 # 🔮 Preview
 > `vs_propa_raplak.ahk` & `vs_propa_zenith.ahk`
@@ -65,7 +66,7 @@
 
 ## Frequently Asked Questions
 
-### Q: Why I need fonts?
+### Q: Why fonts are needed?
 ### A: Fonts are needed for preventing situations like this
 
   `Before font installation`:
