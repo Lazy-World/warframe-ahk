@@ -66,6 +66,16 @@
 ## Frequently Asked Questions
 
 ### Q: Why I need fonts?
-A: Fonts are needed for preventing situations like this
+### A: Fonts are needed for preventing situations like this
+
+  `Before font installation`:
+  
   ![why_fonts](/attachments/Images/why_fonts.png)
 
+  `After font installation`:
+  
+  ![why_fonts](./attachments/Images/ui.png)
+
+[Back to TOC](#contents)
+
+---
